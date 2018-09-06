@@ -36,6 +36,12 @@ gem 'jbuilder', '~> 2.5'
 # Use devise to handle authentication
 gem 'devise'
 
+# Use bootstrap for responsiveness
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'jquery-rails'
+gem "bootstrap_form", ">= 4.0.0.alpha1"
+
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
