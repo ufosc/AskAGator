@@ -33,6 +33,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use materialize for UI
+gem 'materialize-sass', '~> 1.0.0.rc2'
+
 # Use devise to handle authentication
 gem 'devise'
 
