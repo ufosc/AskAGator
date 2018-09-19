@@ -83,6 +83,9 @@ GEM
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     database_cleaner (1.7.0)
+    debase (0.2.2)
+      debase-ruby_core_source (>= 0.10.2)
+    debase-ruby_core_source (0.10.3)
     devise (4.5.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -198,6 +201,8 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
+    ruby-debug-ide (0.6.1)
+      rake (>= 0.8.1)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
     sass (3.5.7)
@@ -261,6 +266,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   database_cleaner
+  debase
   devise
   factory_girl_rails
   headless
@@ -274,6 +280,7 @@ DEPENDENCIES
   rails (~> 5.2.1)
   rails-controller-testing
   rspec-rails (~> 3.6)
+  ruby-debug-ide
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
