@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Generate the default global roles.
+GlobalRole.create(name: "SysAdmin", rank: -1)
+GlobalRole.create(name: "UnivAdmin", rank: 1)
+GlobalRole.create(name: "Professor", rank: 2)
+GlobalRole.create(name: "Student", rank: 3)
