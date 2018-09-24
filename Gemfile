@@ -45,6 +45,9 @@ gem 'jquery-rails'
 gem "bootstrap_form", ">= 4.0.0.alpha1"
 
 
+# Use pundit for authorization
+gem 'pundit'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 

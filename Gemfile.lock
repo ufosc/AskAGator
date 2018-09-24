@@ -146,6 +146,8 @@ GEM
       websocket-driver (>= 0.2.0)
     public_suffix (3.0.3)
     puma (3.12.0)
+    pundit (2.0.0)
+      activesupport (>= 3.0.0)
     rack (2.0.5)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -277,6 +279,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   poltergeist
   puma (~> 3.11)
+  pundit
   rails (~> 5.2.1)
   rails-controller-testing
   rspec-rails (~> 3.6)
@@ -294,4 +297,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.4
+   1.16.5
