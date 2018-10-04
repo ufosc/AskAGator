@@ -6,7 +6,7 @@ Teacher/Student interaction software.
 
 ### FIRST RUN
 
-First install docker-compose. Checkout (this list of resource)[INSTALLING_DOCKER.md]. Then use:
+First install docker-compose. Checkout [INSTALLING_DOCKER.md](INSTALLING_DOCKER.md). Then use:
 
 ```bash
 docker-compose up --build
