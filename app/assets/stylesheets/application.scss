@@ -11,7 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
 */
-// @import "bootstrap-sprockets";
-// @import "bootstrap";
+@import "bootstrap-sprockets";
+@import "bootstrap";
 @import "materialize";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";

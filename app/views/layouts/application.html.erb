@@ -10,12 +10,14 @@
   </head>
 
   <body>
-    <div class="alert alert-warning">
-      <%= flash[:alert] %>
-    </div>
-    <div class="alert alert-primary">
-      <%= flash[:notice] %>
-    </div>
+    <% flash.each do |key, value| %>
+      <% if key == "alert" %>
+        <div class="alert alert-warning">
+      <% else %>
+        <div class="alert alert-primary">
+      <% end %>
+        <%= value %></div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
