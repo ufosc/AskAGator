@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_26_230930) do
+ActiveRecord::Schema.define(version: 2018_10_20_005854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,20 +23,24 @@ ActiveRecord::Schema.define(version: 2018_09_26_230930) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "permissions", force: :cascade do |t|
+    t.string "name"
+    t.integer "perm_type"
+    t.integer "target"
+  end
+
+  create_table "permissions_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "permission_id", null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
-    t.integer "rank"
-    t.integer "scope"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "course_id"
   end
 
   create_table "roles_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "role_id", null: false
-    t.index ["role_id"], name: "index_roles_users_on_role_id"
-    t.index ["user_id"], name: "index_roles_users_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,8 +59,11 @@ ActiveRecord::Schema.define(version: 2018_09_26_230930) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "primary_role_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["primary_role_id"], name: "index_users_on_primary_role_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "users", "roles", column: "primary_role_id"
 end
