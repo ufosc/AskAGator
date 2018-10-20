@@ -19,11 +19,10 @@ RSpec.describe "login page", :type => :request do
     end
 
     scenario "Signing in with wrong credentials" do
-        user = FactoryBot.create(:student)
         visit "/login"
-        fill_in 'Email', with: user.email
+        fill_in 'Email', with: 'test@test.com'
         fill_in 'Password', with: 'wrongpassword'
         click_button 'Sign In'
-        expect(page).to have_content 'Incorrect email or password'
+        expect(page).to have_content 'Incorrect Email or Password.'
     end
 end
