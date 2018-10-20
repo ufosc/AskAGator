@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <header>
     <% flash.each do |key, value| %>
       <% if key == "alert" %>
         <div class="alert alert-warning">
@@ -18,6 +19,19 @@
       <% end %>
         <%= value %></div>
     <% end %>
+    </header>
+    
+    <main>
     <%= yield %>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container">
+        © 2018 Open Source Club
+        <a class="grey-text text-lighten-4 right" href="https://github.com/ufosc/GatorQuestions/">View the Source</a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
