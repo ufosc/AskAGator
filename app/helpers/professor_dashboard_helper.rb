@@ -1,0 +1,2 @@
+module ProfessorDashboardHelper
+end
