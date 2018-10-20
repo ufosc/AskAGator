@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'dashboard', to: 'professor_dashboard#index'
+  get 'dashboard', to: 'dashboard#index'
   resources :courses
   devise_for :users
   devise_scope :user do
