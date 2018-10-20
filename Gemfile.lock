@@ -221,6 +221,8 @@ GEM
     selenium-webdriver (3.14.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
+    shoulda-matchers (4.0.0.rc1)
+      activesupport (>= 4.2.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -286,6 +288,7 @@ DEPENDENCIES
   ruby-debug-ide
   sass-rails (~> 5.0)
   selenium-webdriver
+  shoulda-matchers (= 4.0.0.rc1)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

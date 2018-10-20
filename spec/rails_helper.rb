@@ -10,6 +10,13 @@ require 'capybara/poltergeist'
 require 'factory_bot_rails'
 require 'capybara/rspec'
 
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -66,7 +73,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Capybara::DSL
   Capybara.javascript_driver = :poltergeist
-  Capybara.server = :puma 
+  Capybara.server = :puma
   
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
