@@ -7,8 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 admin = Role.create(id: 0, name: 'Admin')
-admin.save # To be sure
-Role.create!(id: 1, name: 'Professor')
-Role.create!(id: 2, name: 'Student')
+professor = Role.create(id: 1, name: 'Professor')
+student = Role.create(id: 2, name: 'Student')
+admin.save
+professor.save
+student.save
 
-User.create!(first_name: 'Admin', middle_name: 'admin', last_name: 'admin', email: 'root@school.edu', password: 'rootpass', password_confirmation: 'rootpass', primary_role: Role.first)
+User.create!(first_name: 'Admin', middle_name: 'admin', last_name: 'admin', email: 'root@school.edu', password: 'rootpass', password_confirmation: 'rootpass', primary_role: admin)
+User.create!(first_name: 'Profey', middle_name: 'the', last_name: 'Professor', email: 'prof@school.edu', password: 'rootpass', password_confirmation: 'rootpass', primary_role: professor)
+User.create!(first_name: 'Stud', middle_name: 'the', last_name: 'Student', email: 'stud@school.edu', password: 'rootpass', password_confirmation: 'rootpass', primary_role: student)
+User.create!(first_name: 'Nobody', middle_name: 'the', last_name: 'lame', email: 'lame@school.edu', password: 'rootpass', password_confirmation: 'rootpass', primary_role: nil)
