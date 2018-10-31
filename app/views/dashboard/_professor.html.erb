@@ -1,1 +1,31 @@
-<h1>Professor Dashboard</h1>
+<div class="row">
+  <div class="jumbotron courses-container col-sm-12 col-sm-offset-0">
+    <!-- Add a div row that verticially centers the <p> and <div> containers -->
+    <p class="col-sm-2" align="center" id="courses-title"><strong>Your courses</strong></p>
+
+    <div class="col-sm-2 col-sm-offset-6" id="courses-create">
+      <%= link_to "Manage courses", root_path, class: "btn", style: "margin-bottom: 1vh;" %>
+    </div>
+
+    <div class="col-sm-2" id="courses-create">
+      <%= link_to "Create new course", root_path, class: "btn", style: "margin-bottom: 1vh;" %>
+    </div>
+  </div>
+</div>
+
+<!-- Temporal array until Course model is done (current_user.courses) -->
+<!-- Fix the img icon -->
+
+<ul class="collection">
+  <% user_courses = ["COP3530 Data Structures", "MAC2312 Calculus II", "PHY2049 Physics"] %>
+  <% user_courses.each do |course| %>
+    <li class="collection-item avatar">
+      <img src="someimg.png" alt="" class="circle">
+      <span class="title" style="font-size: 1.5em;"><strong><%= course %></strong></span>
+      <p style="font-size: 1em;"><i>This is the class brief description</i><br>
+         <%= link_to "View Course", root_path, class:"collection-item" %>
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">settings</i></a>
+    </li>
+  <% end %>
+</ul>

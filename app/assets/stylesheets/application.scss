@@ -11,11 +11,29 @@
  * It is generally better to create a new file per style scope.
  *
 */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "materialize";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
+
+#courses-title {
+  font-size: 2em;
+  color: white;
+  line-height: 0.8em;
+  margin-top: 0.8vh;
+}
+
+#courses-create {
+
+}
+
+.courses-container {
+  background-color: #7986cb;
+  padding-bottom: 0.8vh;
+  padding-top: 2.2vh;
+}
 
 body {
     display: flex;
