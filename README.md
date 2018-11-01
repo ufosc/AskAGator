@@ -1,4 +1,4 @@
-# GatorAnswer
+# GatorAnswer [![Build Status](https://travis-ci.com/ufosc/GatorQuestions.svg?branch=develop)](https://travis-ci.com/ufosc/GatorQuestions)
 
 Teacher/Student interaction software.
 
