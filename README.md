@@ -1,4 +1,4 @@
-# GatorAnswer [![Build Status](https://travis-ci.com/ufosc/GatorQuestions.svg?branch=develop)](https://travis-ci.com/ufosc/GatorQuestions)
+# GatorAnswer [![Build Status](https://travis-ci.com/ufosc/GatorQuestions.svg?branch=develop)](https://travis-ci.com/ufosc/GatorQuestions)  [![Maintainability](https://api.codeclimate.com/v1/badges/171acfee383a5786bcc7/maintainability)](https://codeclimate.com/github/ufosc/GatorQuestions/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/171acfee383a5786bcc7/test_coverage)](https://codeclimate.com/github/ufosc/GatorQuestions/test_coverage)
 
 Teacher/Student interaction software.
 
