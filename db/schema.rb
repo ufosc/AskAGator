@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_20_005854) do
+ActiveRecord::Schema.define(version: 2018_11_01_181430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(version: 2018_10_20_005854) do
     t.bigint "permission_id", null: false
   end
 
+  create_table "professors_to_courses", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.index ["course_id"], name: "index_professors_to_courses_on_course_id"
+    t.index ["user_id"], name: "index_professors_to_courses_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
   end
@@ -41,6 +48,13 @@ ActiveRecord::Schema.define(version: 2018_10_20_005854) do
   create_table "roles_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "role_id", null: false
+  end
+
+  create_table "students_to_courses", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.index ["course_id"], name: "index_students_to_courses_on_course_id"
+    t.index ["user_id"], name: "index_students_to_courses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
