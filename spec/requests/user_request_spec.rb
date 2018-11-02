@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "login page", :type => :request do
+
+    before(:each) do
+        # Since roles are unique we need to delete all users and roles before each test
+        User.delete_all
+        Role.delete_all
+    end
+
     it "displays a login form at /login" do
         user = FactoryBot.create(:student)
         visit "/login"
