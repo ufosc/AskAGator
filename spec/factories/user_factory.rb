@@ -7,6 +7,7 @@ FactoryBot.define do
         email { "prof.dr.testerman@test.com" }
         password { "password" }
         password_confirmation { "password" }
+        association :primary_role, factory: :professor_role
     end
 
     factory :student, class: User do
@@ -16,6 +17,7 @@ FactoryBot.define do
         email { "Stu.D.ent@test.com" }
         password { "password" }
         password_confirmation { "password" }
+        association :primary_role, factory: :student_role
     end
 
     factory :admin, class: User do
@@ -25,5 +27,6 @@ FactoryBot.define do
         email { "Add.ma.ximum@test.com" }
         password { "password" }
         password_confirmation { "password" }
+        association :primary_role, factory: :admin_role
     end
 end
