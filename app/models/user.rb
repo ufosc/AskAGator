@@ -16,15 +16,15 @@ class User < ApplicationRecord
     self.primary_role != nil
   end
 
-  def is_professor?
+  def professor?
     self.role? && self.primary_role.id == Role::PROFESSOR_ID
   end
 
-  def is_admin?
+  def admin?
     self.role? && self.primary_role.id == Role::ADMIN_ID
   end
 
-  def is_student?
+  def student?
     self.role? && self.primary_role.id == Role::STUDENT_ID
   end
 

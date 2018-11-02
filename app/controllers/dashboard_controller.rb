@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
 
   def index
     @user = current_user
-    if @user.is_professor?
+    if @user.professor?
       render '_professor'
     else
       render '_student'
