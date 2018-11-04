@@ -8,24 +8,25 @@
     </div>
 
     <div class="col-sm-2" id="courses-create">
-      <%= link_to "Create new course", root_path, class: "btn", style: "margin-bottom: 1vh;" %>
+      <%= link_to "Create new course", new_course_path, class: "btn", style: "margin-bottom: 1vh;" %>
     </div>
   </div>
 </div>
 
-<!-- Temporal array until Course model is done (current_user.courses) -->
 <!-- Fix the img icon -->
-
 <ul class="collection">
-  <% user_courses = ["COP3530 Data Structures", "MAC2312 Calculus II", "PHY2049 Physics"] %>
-  <% user_courses.each do |course| %>
-    <li class="collection-item avatar">
-      <!-- <img src="someimg.png" alt="" class="circle"> -->
-      <span class="title" style="font-size: 1.5em;"><strong><%= course %></strong></span>
-      <p style="font-size: 1em;"><i>This is the class brief description</i><br>
-         <%= link_to "View Course", root_path, class:"collection-item" %>
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">settings</i></a>
-    </li>
+  <% if @courses.empty? %>
+    You have no courses! Click 'Create new course' to get started.
+  <% else %>
+    <% @courses.each do |course| %>
+      <li class="collection-item avatar">
+        <!-- <img src="someimg.png" alt="" class="circle"> -->
+        <span class="title" style="font-size: 1.5em;"><strong><%= course.course_code + ' | ' + course.title %></strong></span>
+        <p style="font-size: 1em;"><i><%= course.description %></i><br>
+          <%= link_to "View Course", course_path(course.id), class:"collection-item" %>
+        </p>
+        <a href="#!" class="secondary-content"><i class="material-icons">settings</i></a>
+      </li>
+    <% end %>
   <% end %>
 </ul>

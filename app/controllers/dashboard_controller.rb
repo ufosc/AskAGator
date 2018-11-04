@@ -4,6 +4,7 @@ class DashboardController < ApplicationController
   def index
     @user = current_user
     if @user.professor?
+      @courses = @user.professor_courses
       render '_professor'
     else
       render '_student'
