@@ -13,7 +13,14 @@ admin.save
 professor.save
 student.save
 
+courses = []
+
+for i in 1000..1010 do
+    courses << Course.create(course_code: "COP#{i}", title: "Test course #{i}", description: "Wow this is a test for #{i}")
+end
+
 User.create!(first_name: 'Admin', middle_name: 'admin', last_name: 'admin', email: 'root@school.edu', password: 'rootpass', password_confirmation: 'rootpass', primary_role: admin)
-User.create!(first_name: 'Profey', middle_name: 'the', last_name: 'Professor', email: 'prof@school.edu', password: 'rootpass', password_confirmation: 'rootpass', primary_role: professor)
+prof = User.create!(first_name: 'Profey', middle_name: 'the', last_name: 'Professor', email: 'prof@school.edu', password: 'rootpass', password_confirmation: 'rootpass', primary_role: professor)
+prof.professor_courses << courses
 User.create!(first_name: 'Stud', middle_name: 'the', last_name: 'Student', email: 'stud@school.edu', password: 'rootpass', password_confirmation: 'rootpass', primary_role: student)
 User.create!(first_name: 'Nobody', middle_name: 'the', last_name: 'lame', email: 'lame@school.edu', password: 'rootpass', password_confirmation: 'rootpass', primary_role: nil)
