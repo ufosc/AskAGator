@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :permissions
 
-  has_and_belongs_to_many :student_courses, :class_name => :courses, :join_table => :students_to_courses
-  has_and_belongs_to_many :professor_courses, :class_name => :courses, :join_table => :professors_to_courses
+  has_and_belongs_to_many :student_courses, :class_name => 'Course', :join_table => :students_to_courses
+  has_and_belongs_to_many :professor_courses, :class_name => 'Course', :join_table => :professors_to_courses
 
   has_and_belongs_to_many :courses, :join_table => :students_to_courses
   belongs_to :primary_role, class_name: 'Role', required: false
