@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_01_181430) do
+ActiveRecord::Schema.define(version: 2018_11_04_193145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2018_11_01_181430) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "join_code", null: false
+    t.index ["join_code"], name: "index_courses_on_join_code", unique: true
   end
 
   create_table "permissions", force: :cascade do |t|
