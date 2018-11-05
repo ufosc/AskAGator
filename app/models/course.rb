@@ -11,7 +11,7 @@ class Course < ApplicationRecord
     def generate_join_code
         loop do
             # Generate a 6 digit alphanumeric code
-            join_code = SecureRandom.hex(3).upcase!
+            join_code = SecureRandom.hex(3).upcase
             # Make sure that it doesn't exist already
             break join_code unless Course.where(join_code: join_code).exists?
         end
