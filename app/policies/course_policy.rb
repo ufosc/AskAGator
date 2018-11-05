@@ -1,28 +1,23 @@
-class CoursePolicy
-    attr_reader :user
-
-    def initialize(user):
-        @user = user
-    end
+class CoursePolicy < ApplicationPolicy
 
     def new?
-        user.is_professor?
+        user.professor?
     end
 
     def edit?
-        user.is_professor?
+        user.professor?
     end
 
     def create?
-        user.is_professor?
+        user.professor?
     end
 
     def update?
-        user.is_professor?
+        user.professor?
     end
 
     def destroy?
-        user.is_admin?
+        user.admin?
     end
 
 end
