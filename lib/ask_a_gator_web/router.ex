@@ -13,6 +13,10 @@ defmodule AskAGatorWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api", AskAGatorWeb do
+    pipe_through :api
+  end
+
   scope "/", AskAGatorWeb do
     pipe_through :browser
 
