@@ -22,6 +22,10 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :guardian, Guardian,
+  issuer: "AskAGator",
+  secret_key: "uUuEt3n7CZ8MFVkIgc2VR9giDlczGIidgVytW1j4eYMB/gcgH5xZtyjQXIlmmIgp"
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
