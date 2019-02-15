@@ -9,6 +9,7 @@ const AllUsers = () => (
         allUsers {
             id
             name
+            email
         }
       }
     `}
@@ -17,9 +18,9 @@ const AllUsers = () => (
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
 
-      return data.allUsers.map(({ id, name }) => (
+      return data.allUsers.map(({id, name, email} : { id: string, name: string, email: string }) => (
         <div key={id}>
-          <p>{id}: {name}</p>
+          <p>{name}: {email}</p>
         </div>
       ));
     }}
