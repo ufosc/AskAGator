@@ -22,7 +22,7 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :guardian, Guardian,
+config :ask_a_gator, AskAGator.Guardian,
   issuer: "AskAGator",
   secret_key: "uUuEt3n7CZ8MFVkIgc2VR9giDlczGIidgVytW1j4eYMB/gcgH5xZtyjQXIlmmIgp"
 

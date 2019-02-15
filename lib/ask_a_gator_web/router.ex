@@ -11,10 +11,15 @@ defmodule AskAGatorWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug AskAGatorWeb.Context
   end
 
-  scope "/api", AskAGatorWeb do
+  scope "/api" do
     pipe_through :api
+
+    forward "/graphqli", Absinthe.Plug.GraphiQL,
+      schema: AskAGatorWeb.Schema
+    forward "/", Absinthe.Plug, schema: AskAGatorWeb.Schema
   end
 
   scope "/", AskAGatorWeb do
