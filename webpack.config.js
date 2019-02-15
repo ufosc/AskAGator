@@ -39,6 +39,6 @@ module.exports = (env, options) => ({
     new CopyWebpackPlugin([{ from: 'assets/static/', to: '../' }])
   ],
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
+    extensions: ['.ts', '.tsx', '.mjs', '.js', '.jsx', '.json', '.gql', '.graphql']
   }
 });
