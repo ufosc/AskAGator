@@ -2,15 +2,12 @@ import * as React from 'react'
 import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom'
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
-import { onError } from 'apollo-link-error';
-import { withClientState } from 'apollo-link-state';
-import { ApolloLink, Observable } from 'apollo-link';
+
+import { AUTH_TOKEN } from './constants';
 
 import HomePage from './pages/index';
 import LoginPage from './pages/LoginPage';
-import Header from './components/Header'
+import Header from './components/Header';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/api',
@@ -18,7 +15,7 @@ const client = new ApolloClient({
     credentials: 'include'
   },
   request: async (operation) => {
-    const token = await localStorage.getItem('token');
+    const token = await localStorage.getItem(AUTH_TOKEN);
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : "",
@@ -26,12 +23,7 @@ const client = new ApolloClient({
     });
   },
   onError: ({ graphQLErrors, networkError }) => {
-    // if (graphQLErrors) {
-    //   sendToLoggingService(graphQLErrors);
-    // }
-    // if (networkError) {
-    //   logoutUser();
-    // }
+    // Do something with the errors lol
   }
 });
 
@@ -40,13 +32,11 @@ export default class Root extends React.Component {
     return (
       <BrowserRouter>
         <ApolloProvider client={client}>
-            <>
-              <Header/>
-              <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route path="/login" component={withRouter(LoginPage)} />
-              </Switch>
-            </>
+          <Header/>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/login" component={withRouter(LoginPage)} />
+          </Switch>
         </ApolloProvider>
       </BrowserRouter>
     )
