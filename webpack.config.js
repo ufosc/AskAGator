@@ -13,7 +13,7 @@ module.exports = (env, options) => ({
     ]
   },
   entry: {
-      app: './assets/js/app.tsx'
+      app: ['babel-polyfill','./assets/js/app.tsx']
   },
   output: {
     filename: 'app.js',
