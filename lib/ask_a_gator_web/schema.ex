@@ -12,14 +12,14 @@ defmodule AskAGatorWeb.Schema do
 
     mutation do
         field :login, type: :session do
-            arg(:email, non_null(:string))
-            arg(:password, non_null(:string))
+            arg :email, non_null(:string)
+            arg :password, non_null(:string)
 
             resolve &UserResolver.login/3
         end
 
         field :logout, type: :user do
             resolve &UserResolver.logout/2
-        end 
+        end
     end
 end
