@@ -1,0 +1,24 @@
+language: elixir
+
+elixir:
+  - 1.8.1
+otp_release:
+  - 21.2
+
+addons:
+  postgresql: '9.4'
+
+services:
+  - postgresql
+
+before_script:
+  - cp config/travis.exs config/test.exs
+  - mix do ecto.create, ecto.migrate
+
+script:
+  - mix test
+
+cache:
+  directories:
+    - _build
+    - deps
