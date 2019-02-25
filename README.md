@@ -11,7 +11,7 @@ To get started with development on AskAGator follow these steps:
 1. Install phoenix (v1.4.1)
 1. Install node (v11.9.0) & yarn (v1.13.0)
 1. Install Postgresql (11.1)
-1. Create a postgres user named postgres with the password postgres
+1. Create a postgres user named postgres and no password or password of postgres (Should be the default)
 1. Clone this repo
 1. Install the Phoenix dependencies with `mix deps.get`
 1. Create and migrate your database with `mix ecto.setup`
