@@ -1,7 +1,7 @@
 import * as React from 'react'
 import gql from "graphql-tag";
 
-class SingUpPage extends React.Component {
+class SignUpPage extends React.Component {
     render() {
         return (
             <div>

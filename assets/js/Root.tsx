@@ -38,7 +38,7 @@ export default class Root extends React.Component {
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={withRouter(LoginPage)} />
 
-            <Route path="/sign up" component={withRouter(SignUpPage)} />
+            <Route path="/signup" component={withRouter(SignUpPage)} />
           </Switch>
         </ApolloProvider>
       </BrowserRouter>
