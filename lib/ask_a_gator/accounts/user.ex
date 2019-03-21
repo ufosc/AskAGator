@@ -2,7 +2,7 @@ defmodule AskAGator.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  import Argon2, only: [hash_pwd_salt: 1]
+  import Bcrypt, only: [hash_pwd_salt: 1]
 
   alias AskAGator.Accounts.User
 

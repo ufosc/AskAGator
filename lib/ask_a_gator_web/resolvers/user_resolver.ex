@@ -10,7 +10,7 @@ defmodule AskAGatorWeb.UserResolver do
     user = Repo.get_by(User, email: email)
 
     cond do
-      user && Argon2.verify_pass(given_pass, user.password_hash) ->
+      user && Bcrypt.verify_pass(given_pass, user.password_hash) ->
         {:ok, user}
 
       true ->
