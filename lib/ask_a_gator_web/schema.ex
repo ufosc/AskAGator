@@ -1,25 +1,43 @@
 defmodule AskAGatorWeb.Schema do
-    use Absinthe.Schema
+  use Absinthe.Schema
 
-    alias AskAGatorWeb.UserResolver
-    import_types AskAGatorWeb.Schema.DataTypes
+  alias AskAGatorWeb.UserResolver
+  import_types(AskAGatorWeb.Schema.DataTypes)
 
-    query do
-        field :all_users, list_of(:user) do
-            resolve &UserResolver.all_users/3
-        end
+  query do
+    field :all_users, list_of(:user) do
+      resolve(&UserResolver.all_users/2)
     end
 
-    mutation do
-        field :login, type: :session do
-            arg :email, non_null(:string)
-            arg :password, non_null(:string)
-
-            resolve &UserResolver.login/3
-        end
-
-        field :logout, type: :user do
-            resolve &UserResolver.logout/2
-        end
+    field :profile, type: :user do
+      resolve(&UserResolver.current_user/2)
     end
+  end
+
+  mutation do
+    field :login, type: :session do
+      arg(:email, non_null(:string))
+      arg(:password, non_null(:string))
+
+      resolve(&UserResolver.login/3)
+      middleware fn resolution, _ ->
+        with %{value: %{token: token}} <- resolution do
+          Map.update!(resolution, :context, fn ctx ->
+            Map.put(ctx, :auth_token, token)
+          end)
+        end
+      end
+    end
+
+    field :logout, type: :session do
+      resolve(&UserResolver.logout/2)
+      middleware fn resolution, _ ->
+        with %{value: %{token: token}} <- resolution do
+          Map.update!(resolution, :context, fn ctx ->
+            Map.delete(ctx, :auth_token)
+          end)
+        end
+      end
+    end
+  end
 end
