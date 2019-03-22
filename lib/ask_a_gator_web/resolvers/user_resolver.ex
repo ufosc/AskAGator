@@ -24,7 +24,9 @@ defmodule AskAGatorWeb.UserResolver do
       {:ok, user} ->
         token = Authenticator.generate_token(user.id)
         AskAGator.Accounts.store_token(user, token)
-      err -> err
+
+      err ->
+        err
     end
   end
 
@@ -33,15 +35,15 @@ defmodule AskAGatorWeb.UserResolver do
     {:ok, current_user}
   end
 
+  def logout(_args, _info) do
+    {:error, "Not Signed In"}
+  end
+
   def current_user(_root, %{context: %{current_user: current_user, token: _token}}) do
     {:ok, current_user}
   end
 
   def current_user(_root, _info) do
-    {:error, "Not Signed In"}
-  end
-
-  def logout(_args, _info) do
     {:error, "Not Signed In"}
   end
 end

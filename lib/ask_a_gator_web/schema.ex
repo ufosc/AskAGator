@@ -32,7 +32,7 @@ defmodule AskAGatorWeb.Schema do
     field :logout, type: :session do
       resolve(&UserResolver.logout/2)
       middleware fn resolution, _ ->
-        with %{value: %{token: token}} <- resolution do
+        with %{value: %{token: _token}} <- resolution do
           Map.update!(resolution, :context, fn ctx ->
             Map.delete(ctx, :auth_token)
           end)

@@ -7,7 +7,7 @@ defmodule AskAGator.Services.Authenticator do
 
   def verify_token(token) do
     case Phoenix.Token.verify(AskAGatorWeb.Endpoint, @seed, token, max_age: 86400) do
-      {:ok, id} -> {:ok, token}
+      {:ok, _id} -> {:ok, token}
       error -> error
     end
   end
