@@ -42,5 +42,18 @@ defmodule AskAGatorWeb.Endpoint do
     key: "_ask_a_gator_key",
     signing_salt: "iJRgM5OP"
 
+  def absinthe_before_send(conn, %Absinthe.Blueprint{} = blueprint) do
+    conn = fetch_session(conn)
+    if auth_token = blueprint.execution.context[:auth_token] do
+      put_session(conn, :auth_token, auth_token)
+    else
+      conn
+    end
+  end
+
+  def absinthe_before_send(conn, _) do
+    conn
+  end
+
   plug AskAGatorWeb.Router
 end

@@ -6,7 +6,7 @@ defmodule AskAGatorWeb.Schema do
 
   query do
     field :all_users, list_of(:user) do
-      resolve(&UserResolver.all_users/3)
+      resolve(&UserResolver.all_users/2)
     end
   end
 
@@ -16,10 +16,24 @@ defmodule AskAGatorWeb.Schema do
       arg(:password, non_null(:string))
 
       resolve(&UserResolver.login/3)
+      middleware fn resolution, _ ->
+        with %{value: %{token: token}} <- resolution do
+          Map.update!(resolution, :context, fn ctx ->
+            Map.put(ctx, :auth_token, token)
+          end)
+        end
+      end
     end
 
-    field :logout, type: :user do
+    field :logout, type: :session do
       resolve(&UserResolver.logout/2)
+      middleware fn res, _ ->
+        %{res |
+          context: Map.delete(res.context, :auth_token),
+          value: %{},
+          state: :resolved
+        }
+      end
     end
   end
 end

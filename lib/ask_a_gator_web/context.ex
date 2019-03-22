@@ -14,7 +14,8 @@ defmodule AskAGatorWeb.Context do
   end
 
   def build_context(conn) do
-    with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
+    conn = fetch_session(conn)
+    with token <- get_session(conn, :auth_token),
          {:ok, current_user} <- authorize(token) do
       %{current_user: current_user, token: token}
     else

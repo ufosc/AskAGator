@@ -18,7 +18,10 @@ defmodule AskAGatorWeb.Router do
     pipe_through :api
 
     forward "/graphqli", Absinthe.Plug.GraphiQL, schema: AskAGatorWeb.Schema
-    forward "/", Absinthe.Plug, schema: AskAGatorWeb.Schema
+
+    forward "/", Absinthe.Plug,
+      schema: AskAGatorWeb.Schema,
+      before_send: {AskAGatorWeb.Endpoint, :absinthe_before_send}
   end
 
   scope "/", AskAGatorWeb do

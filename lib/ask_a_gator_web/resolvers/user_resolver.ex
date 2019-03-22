@@ -1,8 +1,11 @@
 defmodule AskAGatorWeb.UserResolver do
   alias AskAGator.Accounts.User
   alias AskAGator.Repo
+  alias AskAGator.Services.Authenticator
 
-  def all_users(_root, _args, _info) do
+  require Logger
+
+  def all_users(_root, _info) do
     {:ok, Repo.all(User)}
   end
 
@@ -19,10 +22,11 @@ defmodule AskAGatorWeb.UserResolver do
   end
 
   def login(_root, %{email: email, password: password}, _info) do
-    with {:ok, user} <- login_with_email_pass(email, password),
-         {:ok, jwt, _} <- AskAGator.Guardian.encode_and_sign(user),
-         {:ok, _} <- AskAGator.Accounts.store_token(user, jwt) do
-      {:ok, %{token: jwt}}
+    case login_with_email_pass(email, password) do
+      {:ok, user} ->
+        token = Authenticator.generate_token(user)
+        AskAGator.Accounts.store_token(user, token)
+      err -> err
     end
   end
 
