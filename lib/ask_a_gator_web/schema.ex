@@ -8,6 +8,10 @@ defmodule AskAGatorWeb.Schema do
     field :all_users, list_of(:user) do
       resolve(&UserResolver.all_users/2)
     end
+
+    field :profile, type: :user do
+      resolve(&UserResolver.current_user/2)
+    end
   end
 
   mutation do
@@ -27,12 +31,12 @@ defmodule AskAGatorWeb.Schema do
 
     field :logout, type: :session do
       resolve(&UserResolver.logout/2)
-      middleware fn res, _ ->
-        %{res |
-          context: Map.delete(res.context, :auth_token),
-          value: %{},
-          state: :resolved
-        }
+      middleware fn resolution, _ ->
+        with %{value: %{token: token}} <- resolution do
+          Map.update!(resolution, :context, fn ctx ->
+            Map.delete(ctx, :auth_token)
+          end)
+        end
       end
     end
   end

@@ -17,19 +17,25 @@ defmodule AskAGatorWeb.Context do
     conn = fetch_session(conn)
     with token <- get_session(conn, :auth_token),
          {:ok, current_user} <- authorize(token) do
-      %{current_user: current_user, token: token}
+          %{current_user: current_user, token: token}
     else
-      _ -> %{}
+      _ ->
+        delete_session(conn, :auth_token)
+        %{}
     end
   end
 
   defp authorize(token) do
-    User
-    |> where(token: ^token)
-    |> Repo.one()
+    AskAGator.Services.Authenticator.verify_token(token)
     |> case do
-      nil -> {:error, "Invalid authorization token"}
-      user -> {:ok, user}
+      {:ok, token} -> User
+        |> where(token: ^token)
+        |> Repo.one()
+        |> case do
+            nil -> {:error, "Invalid token"}
+            user -> {:ok, user}
+        end
+      {_, _} -> {:error, "Invalid token"}
     end
   end
 end

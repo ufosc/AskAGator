@@ -3,8 +3,6 @@ defmodule AskAGatorWeb.UserResolver do
   alias AskAGator.Repo
   alias AskAGator.Services.Authenticator
 
-  require Logger
-
   def all_users(_root, _info) do
     {:ok, Repo.all(User)}
   end
@@ -24,7 +22,7 @@ defmodule AskAGatorWeb.UserResolver do
   def login(_root, %{email: email, password: password}, _info) do
     case login_with_email_pass(email, password) do
       {:ok, user} ->
-        token = Authenticator.generate_token(user)
+        token = Authenticator.generate_token(user.id)
         AskAGator.Accounts.store_token(user, token)
       err -> err
     end
@@ -33,6 +31,14 @@ defmodule AskAGatorWeb.UserResolver do
   def logout(_root, %{context: %{current_user: current_user, token: _token}}) do
     AskAGator.Accounts.revoke_token(current_user)
     {:ok, current_user}
+  end
+
+  def current_user(_root, %{context: %{current_user: current_user, token: _token}}) do
+    {:ok, current_user}
+  end
+
+  def current_user(_root, _info) do
+    {:error, "Not Signed In"}
   end
 
   def logout(_args, _info) do
