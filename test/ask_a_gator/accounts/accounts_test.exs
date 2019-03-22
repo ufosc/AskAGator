@@ -9,6 +9,24 @@ defmodule AskAGator.AccountsTest do
     @valid_attrs %{email: "some@email.com", name: "some name", password: "some password", password_confirmation: "some password"}
     @update_attrs %{email: "some@email.net", name: "some updated name", password: "some password", password_confirmation: "some password"}
     @invalid_attrs %{email: nil, name: nil, password: nil, password_confirmation: nil, token: nil}
+    @non_matching_password_attrs %{
+      email: "some@email.com",
+      name: "some name",
+      password: "some password",
+      password_confirmation: "not some password"
+    }
+    @invalid_email_attrs %{
+      email: "some invalid email.com",
+      name: "some name",
+      password: "some password",
+      password_confirmation: "some password"
+    }
+    @invalid_password_length_attrs %{
+      email: "some@email.com",
+      name: "some name",
+      password: "some",
+      password_confirmation: "some"
+    }
 
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
@@ -17,6 +35,11 @@ defmodule AskAGator.AccountsTest do
         |> Accounts.create_user()
 
       user
+    end
+
+    test "changeset/2 is valid with @valid_attrs" do
+      user = %User{}
+      assert User.changeset(user, @valid_attrs).valid?
     end
 
     test "list_users/0 returns all users" do
@@ -63,6 +86,31 @@ defmodule AskAGator.AccountsTest do
     test "change_user/1 returns a user changeset" do
       user = user_fixture()
       assert %Ecto.Changeset{} = Accounts.change_user(user)
+    end
+
+    test "changeset/2 verifies password = password_confirmation" do
+      user = %User{}
+      assert not User.changeset(user, @non_matching_password_attrs).valid?
+    end
+
+    test "changeset/2 validates email format" do
+      assert not User.changeset(%User{}, @invalid_email_attrs).valid?
+    end
+
+    test "changeset/2 validates password length" do
+      assert not User.changeset(%User{}, @invalid_password_length_attrs).valid?
+    end
+
+    test "changeset/2 validates email uniqueness" do
+      user = user_fixture()
+      {:error, %{ errors: errors}} = Accounts.create_user(@valid_attrs)
+      assert errors[:email]
+    end
+
+    test "changeset/2 validates token uniqueness" do
+      user1 = user_fixture(%{token: "test"})
+      user2 = user_fixture(%{email: "test2@test.com"})
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user2, %{token: "test"})
     end
   end
 end
