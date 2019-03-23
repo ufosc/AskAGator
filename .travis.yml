@@ -1,5 +1,9 @@
 language: elixir
 
+env:
+  global:
+    - CC_TEST_REPORTER_ID=68887229f12cd0ce05c734608e544ba3a37ce20570d5e828a47786b94a0cbc4f
+    - MIX_ENV=test
 elixir:
   - 1.8.1
 otp_release:
@@ -12,11 +16,17 @@ services:
   - postgresql
 
 before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
   - cp config/travis.exs config/test.exs
   - mix do ecto.create, ecto.migrate
 
 script:
-  - mix test
+  - mix coveralls
+
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 cache:
   directories:
