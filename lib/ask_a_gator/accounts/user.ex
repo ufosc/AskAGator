@@ -20,12 +20,13 @@ defmodule AskAGator.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :password, :password_confirmation])
+    |> cast(attrs, [:name, :email, :password, :password_confirmation, :token])
     |> validate_required([:name, :email, :password, :password_confirmation])
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 8)
     |> validate_confirmation(:password)
     |> unique_constraint(:email)
+    |> unique_constraint(:token)
     |> put_password_hash
   end
 

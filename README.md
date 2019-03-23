@@ -1,4 +1,4 @@
-# AskAGator [![Build Status](https://travis-ci.com/ufosc/AskAGator.svg?branch=develop)](https://travis-ci.com/ufosc/AskAGator)
+# AskAGator [![Build Status](https://travis-ci.com/ufosc/AskAGator.svg?branch=develop)](https://travis-ci.com/ufosc/AskAGator) [![Maintainability](https://api.codeclimate.com/v1/badges/2016d41fadb6a9a4e28c/maintainability)](https://codeclimate.com/github/ufosc/AskAGator/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/2016d41fadb6a9a4e28c/test_coverage)](https://codeclimate.com/github/ufosc/AskAGator/test_coverage)
 
 Ask A Gator is a website/platform for professors/teachers at a school or university to use to ask their students questions. They will be able to see live how many responses there are and the total count of who voted for what.
 

@@ -5,6 +5,7 @@ defmodule AskAGatorWeb.Context do
   import Ecto.Query, only: [where: 2]
   alias AskAGator.Accounts.User
   alias AskAGator.Repo
+  alias AskAGator.Services.Authenticator
 
   def init(opts), do: opts
 
@@ -26,7 +27,8 @@ defmodule AskAGatorWeb.Context do
   end
 
   defp authorize(token) do
-    AskAGator.Services.Authenticator.verify_token(token)
+    token
+    |> Authenticator.verify_token
     |> case do
       {:ok, token} -> User
         |> where(token: ^token)
