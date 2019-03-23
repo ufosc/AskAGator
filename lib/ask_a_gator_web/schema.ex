@@ -12,6 +12,10 @@ defmodule AskAGatorWeb.Schema do
     field :profile, type: :user do
       resolve(&UserResolver.current_user/2)
     end
+
+    field :signed_in, type: :boolean do
+      resolve(&UserResolver.signed_in?/2)
+    end
   end
 
   mutation do
