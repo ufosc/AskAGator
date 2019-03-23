@@ -1,4 +1,7 @@
 defmodule AskAGator.AccountsTest do
+  @moduledoc """
+    Tests the Accounts Context and the Users schema
+  """
   use AskAGator.DataCase
 
   alias AskAGator.Accounts
@@ -102,13 +105,13 @@ defmodule AskAGator.AccountsTest do
     end
 
     test "changeset/2 validates email uniqueness" do
-      user = user_fixture()
+      _user = user_fixture()
       {:error, %{errors: errors}} = Accounts.create_user(@valid_attrs)
       assert errors[:email]
     end
 
     test "changeset/2 validates token uniqueness" do
-      user1 = user_fixture(%{token: "test"})
+      _user1 = user_fixture(%{token: "test"})
       user2 = user_fixture(%{email: "test2@test.com"})
       assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user2, %{token: "test"})
     end
