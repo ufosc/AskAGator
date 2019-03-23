@@ -23,7 +23,7 @@ before_script:
   - mix do ecto.create, ecto.migrate
 
 script:
-  - mix coveralls
+  - mix coveralls.json
 
 after_script:
   - ./cc-test-reporter after-build -t excoveralls --exit-code $TRAVIS_TEST_RESULT
