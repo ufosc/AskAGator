@@ -103,7 +103,7 @@ defmodule AskAGator.AccountsTest do
 
     test "changeset/2 validates email uniqueness" do
       user = user_fixture()
-      {:error, %{ errors: errors}} = Accounts.create_user(@valid_attrs)
+      {:error, %{errors: errors}} = Accounts.create_user(@valid_attrs)
       assert errors[:email]
     end
 

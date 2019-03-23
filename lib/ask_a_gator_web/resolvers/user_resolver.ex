@@ -10,12 +10,10 @@ defmodule AskAGatorWeb.UserResolver do
   def login_with_email_pass(email, given_pass) do
     user = Repo.get_by(User, email: email)
 
-    cond do
-      user && Bcrypt.verify_pass(given_pass, user.password_hash) ->
-        {:ok, user}
-
-      true ->
-        {:error, "Email and Password combination could not be found"}
+    if user && Bcrypt.verify_pass(given_pass, user.password_hash) do
+      {:ok, user}
+    else
+      {:error, "Email and Password combination could not be found"}
     end
   end
 
