@@ -8,6 +8,7 @@ import { AUTH_TOKEN } from './constants';
 import HomePage from './pages/index';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
+import AddCoursePage from './pages/AddCoursePage';
 import Header from './components/Header';
 
 const client = new ApolloClient({
@@ -39,6 +40,7 @@ export default class Root extends React.Component {
             <Route path="/login" component={withRouter(LoginPage)} />
 
             <Route path="/signup" component={withRouter(SignUpPage)} />
+            <Route path="/addcourse" component={withRouter(AddCoursePage)} />
           </Switch>
         </ApolloProvider>
       </BrowserRouter>
