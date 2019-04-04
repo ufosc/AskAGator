@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import PersonAdd from '@material-ui/icons/PersonAddOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { WithStyles, createStyles, Theme, withStyles } from '@material-ui/core';
@@ -59,19 +59,31 @@ const SignUpPage = withStyles(styles)(
                     <CssBaseline />
                     <Paper className={classes.paper}>
                         <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
+                        <PersonAdd />
                         </Avatar>
                         <Typography component="h1" variant="h5">
                         Sign up
                         </Typography>
                         <form className={classes.form}>
                         <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="first">First name</InputLabel>
+                            <Input name="username" type="text" id="first-name" autoComplete="first" />
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="last">Last name</InputLabel>
+                            <Input name="username" type="text" id="last-name" autoComplete="last" />
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="email">Email Address</InputLabel>
-                            <Input id="email" name="email" autoComplete="email" autoFocus />
+                            <Input id="email" name="text" autoComplete="email" autoFocus />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="password">Password</InputLabel>
-                            <Input name="password" type="password" id="password" autoComplete="current-password" />
+                            <Input name="password" type="text" id="password" autoComplete="current-password" />
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="password">Password Confirmation</InputLabel>
+                            <Input name="password" type="text" id="password" autoComplete="current-password" />
                         </FormControl>
                         <Button
                             fullWidth
