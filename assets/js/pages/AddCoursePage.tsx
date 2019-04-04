@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import AddIcon from '@material-ui/icons/Add';
+import NoteAdd from '@material-ui/icons/NoteAddOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { WithStyles, createStyles, Theme, withStyles } from '@material-ui/core';
@@ -48,7 +48,7 @@ interface Props extends WithStyles<typeof styles> {
 const AddCoursePage = withStyles(styles)(
     class extends React.Component<Props> {
 
-        signIn() {
+        addCourse() {
             console.log("Add a Course")
         }
 
@@ -59,14 +59,14 @@ const AddCoursePage = withStyles(styles)(
                     <CssBaseline />
                     <Paper className={classes.paper}>
                         <Avatar className={classes.avatar}>
-                        <AddIcon />
+                        <NoteAdd />
                         </Avatar>
                         <Typography component="h1" variant="h5">
                         Add a course
                         </Typography>
                         <form className={classes.form}>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="course">Course</InputLabel>
+                            <InputLabel htmlFor="course">Course code</InputLabel>
                             <Input id="course" name="course" autoComplete="course" autoFocus />
                         </FormControl>
                         <Button
@@ -74,7 +74,7 @@ const AddCoursePage = withStyles(styles)(
                             variant="contained"
                             color="primary"
                             className={classes.submit}
-                            onClick={this.signIn}
+                            onClick={this.addCourse}
                         >
                             Add course
                         </Button>
