@@ -66,24 +66,24 @@ const SignUpPage = withStyles(styles)(
                         </Typography>
                         <form className={classes.form}>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="first">First name</InputLabel>
-                            <Input name="username" type="text" id="first-name" autoComplete="first" />
+                            <InputLabel htmlFor="first-name">First name</InputLabel>
+                            <Input name="first-name" type="text" id="first-name" autoComplete="first" />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="last">Last name</InputLabel>
-                            <Input name="username" type="text" id="last-name" autoComplete="last" />
+                            <InputLabel htmlFor="last-name">Last name</InputLabel>
+                            <Input name="last-name" type="text" id="last-name" autoComplete="last" />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="email">Email Address</InputLabel>
-                            <Input id="email" name="text" autoComplete="email" autoFocus />
+                            <Input id="email" name="email" autoComplete="email" autoFocus />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="password">Password</InputLabel>
-                            <Input name="password" type="text" id="password" autoComplete="current-password" />
+                            <Input name="password" type="password" id="password" autoComplete="current-password" />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password">Password Confirmation</InputLabel>
-                            <Input name="password" type="text" id="password" autoComplete="current-password" />
+                            <InputLabel htmlFor="password-conf">Password Confirmation</InputLabel>
+                            <Input name="password-conf" type="password" id="password-conf" autoComplete="current-password" />
                         </FormControl>
                         <Button
                             fullWidth
