@@ -9,6 +9,9 @@ import HomePage from './pages/index';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import AddCoursePage from './pages/AddCoursePage';
+import ProfilePage from './pages/ProfilePage';
+import EditProfilePage from './pages/EditProfilePage';
+import Sandbox from './pages/SandboxPage';
 import Header from './components/Header';
 
 const client = new ApolloClient({
@@ -41,6 +44,8 @@ export default class Root extends React.Component {
 
             <Route path="/signup" component={withRouter(SignUpPage)} />
             <Route path="/addcourse" component={withRouter(AddCoursePage)} />
+            <Route path="/profile" component={withRouter(ProfilePage)} />
+            <Route path="/editprofile" component={withRouter(EditProfilePage)} />
           </Switch>
         </ApolloProvider>
       </BrowserRouter>
