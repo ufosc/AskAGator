@@ -8,6 +8,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
+    "@types/react-redux": "^7.0.6",
     "apollo-boost": "^0.1.28",
     "apollo-link-context": "^1.0.14",
     "graphql": "^14.1.1",

@@ -1,8 +1,47 @@
 import * as React from 'react'
-import ButtonAppBar from './ButtonAppBar'
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
-const Header: React.FC = () => (
-  <ButtonAppBar/>
-)
+import { connect } from 'react-redux'
+import { User } from '../models/user';
+import { loginAct } from '../store/actions/auth';
 
-export default Header
+import ButtonAppBar from './ButtonAppBar';
+
+interface HeaderProps {
+  loginAct: Function
+}
+
+class Header extends React.Component<HeaderProps> {
+
+  GET_PROFILE = gql`
+    {
+      profile {
+        email
+        name
+      }
+    }
+  `;
+
+  render() {
+    return (
+      <Query query={this.GET_PROFILE}>
+        {({ loading, error, data }) => {
+          if (!error && !loading) {
+            this.props.loginAct({ email: data.profile.email, first_name: data.profile.name, last_name: data.profile.name, exists: true });
+          }
+          return <ButtonAppBar />
+        }}
+      </Query>
+    )
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+      loginAct: (user: User) => dispatch(loginAct(user)),
+      dispatch
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Header);
