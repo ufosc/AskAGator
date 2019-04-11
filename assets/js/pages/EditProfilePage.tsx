@@ -2,7 +2,6 @@ import * as React from 'react'
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { WithStyles, createStyles, Theme, withStyles } from '@material-ui/core';
@@ -34,30 +33,14 @@ const EditProfilePage = withStyles(styles)(
             Edit Profile
             </Typography>
             <Typography component="h1" variant="h6">
-            Change Password
-            </Typography>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">New username</InputLabel>
-              <Input name="password" type="password" id="password" autoComplete="current-password" />
-            </FormControl>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              //onClick={this.editProfile}
-            >
-            Change Password
-            </Button>
-
-            <Typography component="h1" variant="h6">
             Change Username
             </Typography>
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">New password</InputLabel>
+              <InputLabel htmlFor="password">First name</InputLabel>
               <Input name="password" type="password" id="password" autoComplete="current-password" />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Confirm new password</InputLabel>
+              <InputLabel htmlFor="password">Last name</InputLabel>
               <Input name="password" type="password" id="password" autoComplete="current-password" />
             </FormControl>
             <Button
@@ -68,6 +51,30 @@ const EditProfilePage = withStyles(styles)(
               //onClick={this.editProfile}
             >
             Change Username
+            </Button>
+
+            <Typography component="h1" variant="h6">
+            Change Password
+            </Typography>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Enter current password</InputLabel>
+              <Input name="password" type="password" id="password" autoComplete="current-password" />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Enter new password</InputLabel>
+              <Input name="password" type="password" id="password" autoComplete="current-password" />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Confirm new password</InputLabel>
+              <Input name="password" type="password" id="password" autoComplete="current-password" />
+            </FormControl>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              //onClick={this.editProfile}
+            >
+            Change Password
             </Button>
           </main>
         );

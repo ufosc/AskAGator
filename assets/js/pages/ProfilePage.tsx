@@ -73,6 +73,7 @@ const ProfilePage = withStyles(styles)(
         <Typography component="h1" variant="h5">
         Classes stub
         </Typography>
+        <CourseList classes={classes}/>
         <Button
           fullWidth
           variant="contained"

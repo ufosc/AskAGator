@@ -11,7 +11,6 @@ import SignUpPage from './pages/SignUpPage';
 import AddCoursePage from './pages/AddCoursePage';
 import ProfilePage from './pages/ProfilePage';
 import EditProfilePage from './pages/EditProfilePage';
-import Sandbox from './pages/SandboxPage';
 import Header from './components/Header';
 
 const client = new ApolloClient({
