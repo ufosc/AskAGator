@@ -40,9 +40,8 @@ function CourseList(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <p>courselist</p>
       <List component="nav">
-        {AllCourses};
+        {AllCourses}
       </List>
     </div>
   );
