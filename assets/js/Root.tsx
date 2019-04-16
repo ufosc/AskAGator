@@ -13,6 +13,7 @@ import askAGatorRed from './store/reducers'
 import HomePage from './pages/index';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
+import EditProfilePage from './pages/EditProfilePage';
 import Header from './components/Header';
 
 const client = new ApolloClient({
@@ -38,6 +39,7 @@ export default class Root extends React.Component {
               <Route exact path="/" component={HomePage} />
               <Route path="/login" component={withRouter(LoginPage)} />
               <Route path="/signup" component={withRouter(SignUpPage)} />
+              <Route path="/editprofile" component={withRouter(EditProfilePage)} />
             </Switch>
           </ApolloProvider>
         </BrowserRouter>

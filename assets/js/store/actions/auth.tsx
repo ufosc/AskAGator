@@ -13,7 +13,14 @@ export function logoutAct() {
     };
 }
 
+export function editProfileAct() {
+  return {
+      type: AUTH_ACTIONS.EDIT_PROFILE_ACT,
+  };
+}
+
 export const AUTH_ACTIONS = {
     LOGIN_ACT: "LOGIN-ACT",
     LOGOUT_ACT: "LOGOUT-ACT",
+    EDIT_PROFILE_ACT: "EDIT-PROFILE-ACT"
 };
