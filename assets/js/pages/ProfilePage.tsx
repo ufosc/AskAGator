@@ -37,7 +37,7 @@ const ProfilePage = withStyles(styles)(
       <Query
       query={gql`
         {
-          allUsers {
+          profile {
               name
               email
           }
