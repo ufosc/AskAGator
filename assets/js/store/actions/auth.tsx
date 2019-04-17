@@ -13,9 +13,10 @@ export function logoutAct() {
     };
 }
 
-export function editProfileAct() {
+export function editProfileAct(user : User) {
   return {
       type: AUTH_ACTIONS.EDIT_PROFILE_ACT,
+      user
   };
 }
 

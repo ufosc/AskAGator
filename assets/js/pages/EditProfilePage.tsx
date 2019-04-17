@@ -32,17 +32,18 @@ interface Props extends WithStyles<typeof CenteredForm> {
 }
 
 const EDIT_PROFILE_MUTATION = gql`
-    mutation edit_profile($first_name: String!, $last_name: String!, $password: String!) {
+    mutation edit_profile($name: String!, $last_name: String!, $password: String!) {
       edit_profile(first_name: $first_name, last_name: $last_name, password: $password) {
-            token
+          token
         }
     }
 `;
 
 const EditProfilePage = withStyles(styles)(
   class extends React.Component<Props> {
-    
-    ProfileName = () => (
+
+    constructor(props : any) {
+      super(props);
       <Query
       query={gql`
         {
@@ -58,26 +59,21 @@ const EditProfilePage = withStyles(styles)(
         return ( <div>{name}</div>);
       }}
       </Query>
-    )
-
-    constructor(props : any) {
-      super(props);
-      var full_name = this.ProfileName();
+      var a = auth.name;
+      //trying to make the default input the current first and last name of student
       this.state = {
-        first_name: '',
-        last_name: '',
-        password: '',
-        password_confirmation: '',
-        current_password: ''
+        first_name: auth.firstName,
+        last_name: {name},
       };
     }
     
     state = {
       first_name: '',
-        last_name: '',
-        password: '',
-        password_confirmation: '',
-        current_password: ''
+      last_name: '',
+      password: '',
+      password_confirmation: '',
+      current_password: '',
+      password_mismatch: false
     }
     
     handleChange = (name: string) => (event: any) => {
@@ -98,12 +94,13 @@ const EditProfilePage = withStyles(styles)(
             first_name: this.state.first_name, 
             last_name: this.state.first_name, 
           } }).then((result:any) => {
+            //i dont know what to pass in here
             this.props.editProfileAct({})
           })
         }
       }
       >
-          Edit name
+        Edit name
       </Button>
       );
     }
@@ -119,14 +116,16 @@ const EditProfilePage = withStyles(styles)(
           onClick={ e => {
             e.preventDefault()
             if (this.state.password == this.state.password_confirmation) {
+              this.setState({password_mismatch: true});
               props.edit_profile({variables: {
                 password: this.state.password
               } }).then((result:any) => {
-                this.props.editProfileAct({ first_name: this.state.first_name, firstName: '', lastName: ''})
+                //i dont know what to pass in here
+                this.props.editProfileAct({})
               })
             }
             else {
-              alert("The passwords don'must match");
+              this.setState({password_mismatch: false});
             }
           }
           }
@@ -134,6 +133,20 @@ const EditProfilePage = withStyles(styles)(
           Edit password
         </Button>
       );
+    }
+    
+    //if the new password does not match confirmation
+    passwordMismatchMessage()
+    {
+      if (this.state.password_mismatch)
+      {
+        return (
+          //want to make error message red
+          <Typography component="h1" variant="h6" color="red">
+            Passwords must match
+          </Typography>
+        );
+      }
     }
 
     render() {
@@ -149,19 +162,19 @@ const EditProfilePage = withStyles(styles)(
               Change Username
               </Typography>
               <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="password">First name</InputLabel>
-                <Input 
-                  name="password"
-                  type="password"
-                  id="password"
+                <InputLabel htmlFor="name">First name</InputLabel>
+                <Input
+                  name="name"
+                  type="name"
+                  id="name"
                   onChange={this.handleChange('first_name')}
                   autoComplete="current-password" />
               </FormControl>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="password">Last name</InputLabel>
                 <Input 
-                  name="password" 
-                  type="password" id="password" 
+                  name="name" 
+                  type="name" id="name" 
                   autoComplete="current-password"
                   onChange={this.handleChange('last_name')}/>
               </FormControl>
@@ -177,6 +190,7 @@ const EditProfilePage = withStyles(styles)(
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="password">Enter new password</InputLabel>
                 <Input
+                  error={this.state.password_mismatch}
                   name="password"
                   type="password"
                   id="password"
@@ -186,13 +200,15 @@ const EditProfilePage = withStyles(styles)(
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="password">Confirm new password</InputLabel>
                 <Input
+                  error={this.state.password_mismatch}
                   name="password"
                   type="password"
                   id="password"
                   onChange={this.handleChange('password_confirmation')}
                   autoComplete="current-password" />
               </FormControl>
-              {this.EditNameButton({classes, edit_profile})}
+              {this.passwordMismatchMessage()}
+              {this.EditPasswordButton({classes, edit_profile})}
             </main>
           )}  
         </Mutation>
