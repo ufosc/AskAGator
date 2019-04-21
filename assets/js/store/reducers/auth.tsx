@@ -7,7 +7,7 @@ const auth = (state = [], action : any) => {
         case AUTH_ACTIONS.LOGOUT_ACT:
             return { exists: false }
         case AUTH_ACTIONS.EDIT_PROFILE_ACT:
-            return { exists: false }
+            return action.user;
         default:
             return state
     }
