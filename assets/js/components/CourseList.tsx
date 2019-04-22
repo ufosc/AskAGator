@@ -1,54 +1,43 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import CourseListItem from "./CourseListItem";
+import PropTypes from 'prop-types';
 
-const AllCourses = () => (
-  <Query
-  query={gql`
-    {
-      AllCourses {
-          id
-          name
-      }
+class CourseList extends React.Component {
+
+  GET_USER_COURSES = gql`
+  {
+    user_courses {
+      name
+      code
     }
-  `}
->
-  {({ loading, error, data }) => {
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
-
-    return data.allUsers.map(({id, name, email} : { id: string, name: string, email: string }) => (
-      <div key={id}>
-        <ListItemLink href={id}>
-          <ListItemText primary={name} />
-        </ListItemLink>
-      </div>
-    ));
-  }}
-</Query>
-)
-
-function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
-}
-
-function CourseList(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  }
+  `;
+  
+  UserCourses = () => (
+    <Query query={this.GET_USER_COURSES}>
+    {({ loading, error, data }) => {
+      if (loading) return <p>Loading...</p>;
+      if (error) return <p>Error :(</p>;
+        return data.userCourses.map(({code, name} : { code: string, name: string}) => (
+          <div key={code}>
+            <CourseListItem code = {code} name = {name}/>
+        </div>
+      ));
+    }}
+  </Query>
+  )
+  
+  CourseList(props:any) {
+    const { classes } = props;
+    return (
       <List component="nav">
-        {AllCourses}
+        {this.UserCourses}
       </List>
-    </div>
-  );
+    );
+  }
 }
-
-CourseList.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default CourseList;
