@@ -6,8 +6,11 @@ const auth = (state = [], action : any) => {
             return action.user;
         case AUTH_ACTIONS.LOGOUT_ACT:
             return { exists: false }
-        case AUTH_ACTIONS.EDIT_PROFILE_ACT:
-            return action.user;
+        case AUTH_ACTIONS.EDIT_NAME_ACT:
+            return Object.assign({}, state,  {
+                firstName: action.firstName,
+                lastName: action.lastName
+            })
         default:
             return state
     }

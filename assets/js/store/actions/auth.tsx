@@ -13,15 +13,16 @@ export function logoutAct() {
     };
 }
 
-export function editProfileAct(user : User) {
-  return {
-      type: AUTH_ACTIONS.EDIT_PROFILE_ACT,
-      user
-  };
+export function editNameAct(firstName:any, lastName:any) {
+    return {
+        type: AUTH_ACTIONS.EDIT_NAME_ACT,
+        firstName,
+        lastName
+    };
 }
 
 export const AUTH_ACTIONS = {
     LOGIN_ACT: "LOGIN-ACT",
     LOGOUT_ACT: "LOGOUT-ACT",
-    EDIT_PROFILE_ACT: "EDIT-PROFILE-ACT"
+    EDIT_NAME_ACT: "EDIT-NAME-ACT"
 };
