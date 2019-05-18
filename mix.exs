@@ -51,6 +51,7 @@ defmodule AskAGator.MixProject do
       {:poison, "~> 3.1"},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
+      {:puid, "~> 1.0"}
     ]
   end
 
