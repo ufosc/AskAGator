@@ -2,6 +2,7 @@ defmodule AskAGatorWeb.Schema do
   use Absinthe.Schema
 
   alias AskAGatorWeb.UserResolver
+  alias AskAGatorWeb.CourseResolver
   import_types(AskAGatorWeb.Schema.DataTypes)
 
   query do
@@ -11,6 +12,10 @@ defmodule AskAGatorWeb.Schema do
 
     field :profile, type: :user do
       resolve(&UserResolver.current_user/2)
+    end
+
+    field :all_courses, list_of(:course) do
+      resolve(&CourseResolver.all_courses/2)
     end
   end
 
