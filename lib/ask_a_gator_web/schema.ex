@@ -14,6 +14,10 @@ defmodule AskAGatorWeb.Schema do
       resolve(&UserResolver.current_user/2)
     end
 
+    field :signed_in, type: :boolean do
+      resolve(&UserResolver.signed_in?/2)
+    end
+
     field :all_courses, list_of(:course) do
       resolve(&CourseResolver.all_courses/2)
     end

@@ -44,4 +44,12 @@ defmodule AskAGatorWeb.UserResolver do
   def current_user(_root, _info) do
     {:error, "Not Signed In"}
   end
+
+  def signed_in?(_root, %{context: %{current_user: _, token: _}}) do
+    {:ok, true}
+  end
+
+  def signed_in?(_root, _info) do
+    {:ok, false}
+  end
 end
