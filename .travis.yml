@@ -4,7 +4,7 @@ env:
   global:
     - CC_TEST_REPORTER_ID=68887229f12cd0ce05c734608e544ba3a37ce20570d5e828a47786b94a0cbc4f
     - MIX_ENV=test
-  - NODE_VERSION="12.3.1"
+    - NODE_VERSION="12.3.1"
 elixir:
   - 1.8.1
 otp_release:
