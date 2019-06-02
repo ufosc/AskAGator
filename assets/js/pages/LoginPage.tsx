@@ -56,7 +56,7 @@ const LoginPage = withStyles(CenteredForm)(
             }
             return (
                 <Mutation mutation={LOGIN_MUTATION}>
-                    {(login, { data }) => (
+                    {(login, { data, loading, error }) => (
                         <main className={classes.main}>
                             <CssBaseline />
                             <Paper className={classes.paper}>
@@ -66,6 +66,7 @@ const LoginPage = withStyles(CenteredForm)(
                                 <Typography component="h1" variant="h5">
                                     Sign in
                                 </Typography>
+                                {error && <p>Wrong username or password</p>}
                                 <form className={classes.form}>
                                     <FormControl margin="normal" required fullWidth>
                                         <InputLabel htmlFor="email">Email Address</InputLabel>
