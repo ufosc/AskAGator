@@ -3,7 +3,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 import { connect } from 'react-redux'
-import { User } from '../models/user';
+import { IUser } from '../models/user';
 import { loginAct } from '../store/actions/auth';
 
 import ButtonAppBar from './ButtonAppBar';
@@ -39,7 +39,7 @@ class Header extends React.Component<HeaderProps> {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-      loginAct: (user: User) => dispatch(loginAct(user)),
+      loginAct: (user: IUser) => dispatch(loginAct(user)),
       dispatch
   }
 }

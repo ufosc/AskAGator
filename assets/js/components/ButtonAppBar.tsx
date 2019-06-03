@@ -11,7 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import { connect } from 'react-redux'
 
-import { User } from '../models/user';
+import { IUser } from '../models/user';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -30,7 +30,7 @@ const HomeLink = (props: Props) => <Link to="/" {...props} />
 const LoginLink = (props: Props) => <Link to="/login" {...props} />
 
 export interface Props extends WithStyles<typeof styles> {
-  user: User
+  user: IUser
 }
 
 const ButtonAppBar = withStyles(styles)(

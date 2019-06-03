@@ -1,9 +1,9 @@
 import * as AuthActions from './auth';
-import { User } from '../../models/user';
+import { IUser } from '../../models/user';
 
 describe('AuthActions', () => {
     it('should create an action to login a User', () => {
-        const user : User = { email: "test@test.com", exists: true, firstName: "Test", lastName: "Test" };
+        const user : IUser = { email: "test@test.com", exists: true, firstName: "Test", lastName: "Test" };
         const expectedAction = {
             type: AuthActions.AUTH_ACTIONS.LOGIN_ACT,
             user
