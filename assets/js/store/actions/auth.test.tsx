@@ -2,7 +2,7 @@ import * as AuthActions from "./auth";
 
 import { IUser } from "../../models/user";
 
-describe("AuthActions", () => {
+describe("store.actions.auth", () => {
   it("should create an action to login a User", () => {
     const user: IUser = {
       email: "test@test.com",
