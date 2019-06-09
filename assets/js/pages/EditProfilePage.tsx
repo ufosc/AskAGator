@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Mutation, Query } from "react-apollo";
 import gql from "graphql-tag";
 import { connect } from 'react-redux';
-import { User } from '../models/user';
+import { IUser } from '../models/user';
 import { editNameAct, AUTH_ACTIONS } from '../store/actions/auth'
 
 import Input from '@material-ui/core/Input';
@@ -32,7 +32,7 @@ const styles = (theme: Theme) => createStyles({
 
 interface Props extends WithStyles<typeof CenteredForm> {
   editNameAct: Function,
-  auth: User
+  auth: IUser
 }
 
 const EDIT_NAME_MUTATION = gql`
@@ -219,7 +219,7 @@ const matchStateToProps = (state : any, ownprops:any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    editNameAct: (user: User) => dispatch(editNameAct(user.firstName, user.lastName)),
+    editNameAct: (user: IUser) => dispatch(editNameAct(user.firstName, user.lastName)),
     dispatch
   }
 }

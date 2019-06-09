@@ -51,10 +51,10 @@ const ProfilePage = withStyles(styles)(
         return (
           <div>
             <Typography component="h1" variant="h5">
-              name : {name}
+              name : {data.profile.name}
             </Typography>
             <Typography component="h1" variant="h5">
-              email : {name}
+              email : {data.profile.email}
             </Typography>
           </div>
         );
@@ -73,7 +73,7 @@ const ProfilePage = withStyles(styles)(
         <Typography component="h1" variant="h5">
         Classes stub
         </Typography>
-        <CourseList/>
+        {/* <CourseList/> */}
         <Button
           fullWidth
           variant="contained"
