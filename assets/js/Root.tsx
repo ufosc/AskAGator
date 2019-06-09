@@ -14,6 +14,7 @@ import EditProfilePage from './pages/EditProfilePage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
+import AddCoursePage from './pages/AddCoursePage';
 
 
 import Header from "./components/Header";
@@ -42,6 +43,7 @@ export default class Root extends React.Component {
               <Route path="/login" component={withRouter(LoginPage as any)} />
               <Route path="/signup" component={withRouter(SignUpPage as any)} />
               <Route path="/editprofile" component={withRouter(EditProfilePage as any)} />
+              <Route path="/addcourse" component={withRouter(AddCoursePage as any)} />
             </Switch>
           </ApolloProvider>
         </BrowserRouter>
