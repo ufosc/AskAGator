@@ -10,9 +10,11 @@ import { createStore } from "redux";
 import { defaultStore } from "./store";
 import reducers from "./store/reducers";
 
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
+import EditProfilePage from './pages/EditProfilePage';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
+
 
 import Header from "./components/Header";
 
@@ -39,6 +41,7 @@ export default class Root extends React.Component {
               <Route exact={true} path="/" component={HomePage} />
               <Route path="/login" component={withRouter(LoginPage as any)} />
               <Route path="/signup" component={withRouter(SignUpPage as any)} />
+              <Route path="/editprofile" component={withRouter(EditProfilePage as any)} />
             </Switch>
           </ApolloProvider>
         </BrowserRouter>
