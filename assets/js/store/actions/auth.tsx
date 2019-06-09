@@ -1,16 +1,16 @@
-import { User } from "../../models/user";
+import { IUser } from "../../models/user";
 
-export function loginAct(user : User) {
-    return {
-        type: AUTH_ACTIONS.LOGIN_ACT,
-        user
-    };
+export function loginAct(user: IUser) {
+  return {
+    type: AUTH_ACTIONS.LOGIN_ACT,
+    user,
+  };
 }
 
 export function logoutAct() {
-    return {
-        type: AUTH_ACTIONS.LOGOUT_ACT,
-    };
+  return {
+    type: AUTH_ACTIONS.LOGOUT_ACT,
+  };
 }
 
 export function editNameAct(firstName:any, lastName:any) {

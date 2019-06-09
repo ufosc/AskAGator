@@ -48,7 +48,7 @@ defmodule AskAGator.MixProject do
       {:comeonin, "~> 5.0"},
       {:bcrypt_elixir, "~> 2.0"},
       {:absinthe_plug, "~> 1.4.0"},
-      {:poison, "~> 3.1"},
+      {:poison, "~> 4.0"},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
       {:puid, "~> 1.0"}

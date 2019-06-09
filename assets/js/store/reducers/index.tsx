@@ -1,9 +1,9 @@
 import auth from "./auth";
 
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux";
 
 const askAGatorRed = combineReducers({
-    auth
-})
+  auth,
+});
 
-export default askAGatorRed
+export default askAGatorRed;

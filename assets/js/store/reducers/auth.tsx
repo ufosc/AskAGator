@@ -1,4 +1,4 @@
-import { AUTH_ACTIONS } from '../actions/auth';
+import { AUTH_ACTIONS } from "../actions/auth";
 
 const auth = (state = [], action : any) => {
     switch (action.type) {
