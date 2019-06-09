@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Mutation } from "react-apollo";
-/* tslint:disable-next-line: import-name */
+
 import gql from "graphql-tag";
 
 import { connect } from "react-redux";
@@ -27,7 +27,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import CenteredForm from "../styles/CenteredForm";
 
 interface Props extends WithStyles<typeof CenteredForm> {
-  loginAct: Function;
+  loginAct: (user: IUser) => any;
   auth: IUser;
 }
 
@@ -65,18 +65,18 @@ const LoginPage = withStyles(CenteredForm)(
                 </Typography>
                 {error && <p>Wrong username or password</p>}
                 <form className={classes.form}>
-                  <FormControl margin="normal" required fullWidth>
+                  <FormControl margin="normal" required={true} fullWidth={true}>
                     <InputLabel htmlFor="email">Email Address</InputLabel>
                     <Input
                       id="email"
                       name="email"
                       autoComplete="email"
-                      autoFocus
+                      autoFocus={true}
                       value={this.state.email}
                       onChange={this.handleChange("email")}
                     />
                   </FormControl>
-                  <FormControl margin="normal" required fullWidth>
+                  <FormControl margin="normal" required={true} fullWidth={true}>
                     <InputLabel htmlFor="password">Password</InputLabel>
                     <Input
                       name="password"
@@ -92,7 +92,7 @@ const LoginPage = withStyles(CenteredForm)(
                     label="Remember me"
                   />
                   <Button
-                    fullWidth
+                    fullWidth={true}
                     variant="contained"
                     color="primary"
                     className={classes.submit}
@@ -140,8 +140,8 @@ const matchStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    loginAct: (user: IUser) => dispatch(loginAct(user)),
     dispatch,
+    loginAct: (user: IUser) => dispatch(loginAct(user)),
   };
 };
 
