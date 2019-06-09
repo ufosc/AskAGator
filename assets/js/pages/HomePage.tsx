@@ -1,15 +1,13 @@
-import * as React from 'react'
+import React from 'react';
 
-import Main from '../components/Main'
+import Main from '../components/Main';
 
-class HomePage extends React.Component {
-    public render() {
-        return (
-            <Main>
-                Hello
-            </Main>
-        );
-    }
-};
+const HomePage: React.FC = () => {
+    return (
+        <Main>
+            Hello
+        </Main>
+    );
+}
 
 export default HomePage;
