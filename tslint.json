@@ -10,7 +10,7 @@
     "rules": {
         "import-name": false,
         "variable-name": false,
-        "interface-name": false
+        "function-name": false
     },
     "rulesDirectory": []
 }
