@@ -1,6 +1,7 @@
 import * as React from "react";
-import { Query } from "react-apollo";
+
 import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
 const AllUsers = () => (
   <Query

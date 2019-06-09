@@ -9,7 +9,7 @@ import { loginAct } from '../store/actions/auth';
 import ButtonAppBar from './ButtonAppBar';
 
 interface HeaderProps {
-  loginAct: Function
+  loginAct: (user: IUser) => any
 }
 
 class Header extends React.Component<HeaderProps> {
@@ -39,8 +39,8 @@ class Header extends React.Component<HeaderProps> {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-      loginAct: (user: IUser) => dispatch(loginAct(user)),
-      dispatch
+    loginAct: (user: IUser) => dispatch(loginAct(user)),
+    dispatch
   }
 }
 

@@ -7,6 +7,10 @@
         "tslint-config-prettier"
     ],
     "jsRules": {},
-    "rules": {},
+    "rules": {
+        "import-name": false,
+        "variable-name": false,
+        "interface-name": false
+    },
     "rulesDirectory": []
 }
