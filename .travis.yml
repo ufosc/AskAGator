@@ -4,6 +4,7 @@ env:
   global:
     - CC_TEST_REPORTER_ID=68887229f12cd0ce05c734608e544ba3a37ce20570d5e828a47786b94a0cbc4f
     - MIX_ENV=test
+    - NODE_VERSION="12.3.1"
 elixir:
   - 1.8.1
 otp_release:
@@ -21,14 +22,21 @@ before_script:
   - ./cc-test-reporter before-build
   - cp config/travis.exs config/test.exs
   - mix do ecto.create, ecto.migrate
+  - nvm install $NODE_VERSION
+  - npm install
 
 script:
   - mix coveralls.json
+  - npx jest --coverage
 
 after_script:
-  - ./cc-test-reporter after-build -t excoveralls --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter format-coverage -t excoveralls -o coverage/codeclimate.backend.json
+  - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.frontend.json coverage/lcov.info
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2                  # Sum both coverage parts into coverage/codeclimate.json
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi  # Upload coverage/codeclimate.json
 
 cache:
   directories:
     - _build
     - deps
+    - node_modules

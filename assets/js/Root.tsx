@@ -1,31 +1,32 @@
-import * as React from 'react'
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom'
+import * as React from "react";
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
-import { defaultStore } from './store'
-import askAGatorRed from './store/reducers'
+import { defaultStore } from "./store";
+import reducers from "./store/reducers";
 
-import HomePage from './pages/index';
-import LoginPage from './pages/LoginPage';
-import SignUpPage from './pages/SignUpPage';
-import Header from './components/Header';
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+
+import Header from "./components/Header";
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/api',
   fetchOptions: {
-    credentials: 'include'
+    credentials: "include",
   },
   onError: ({ graphQLErrors, networkError }) => {
     // Do something with the errors lol
-  }
+  },
+  uri: "http://localhost:4000/api",
 });
 
-const store = createStore(askAGatorRed, defaultStore)
+const store = createStore(reducers, defaultStore as any);
 
 export default class Root extends React.Component {
   public render(): JSX.Element {
@@ -35,13 +36,13 @@ export default class Root extends React.Component {
           <ApolloProvider client={client}>
             <Header />
             <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/login" component={withRouter(LoginPage)} />
-              <Route path="/signup" component={withRouter(SignUpPage)} />
+              <Route exact={true} path="/" component={HomePage} />
+              <Route path="/login" component={withRouter(LoginPage as any)} />
+              <Route path="/signup" component={withRouter(SignUpPage as any)} />
             </Switch>
           </ApolloProvider>
         </BrowserRouter>
       </Provider>
-    )
+    );
   }
 }
