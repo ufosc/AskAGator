@@ -15,7 +15,6 @@ import { createStyles, Theme, WithStyles, withStyles } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Input from "@material-ui/core/Input";
@@ -55,7 +54,6 @@ const LoginPage = withStyles(CenteredForm)(
         <Mutation mutation={LOGIN_MUTATION}>
           {(login, { error }) => (
             <main className={classes.main}>
-              <CssBaseline />
               <Paper className={classes.paper}>
                 <Avatar className={classes.avatar}>
                   <LockOutlinedIcon />
