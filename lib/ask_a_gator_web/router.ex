@@ -17,9 +17,11 @@ defmodule AskAGatorWeb.Router do
   scope "/api" do
     pipe_through :api
 
-    forward "/graphqli", Absinthe.Plug.GraphiQL,
-      schema: AskAGatorWeb.Schema
-    forward "/", Absinthe.Plug, schema: AskAGatorWeb.Schema
+    forward "/graphqli", Absinthe.Plug.GraphiQL, schema: AskAGatorWeb.Schema
+
+    forward "/", Absinthe.Plug,
+      schema: AskAGatorWeb.Schema,
+      before_send: {AskAGatorWeb.Endpoint, :absinthe_before_send}
   end
 
   scope "/", AskAGatorWeb do
@@ -27,9 +29,4 @@ defmodule AskAGatorWeb.Router do
 
     get "/*path", PageController, :index
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", AskAGatorWeb do
-  #   pipe_through :api
-  # end
 end

@@ -1,53 +1,53 @@
-import * as React from 'react'
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom'
+import * as React from "react";
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
+
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 
-import { AUTH_TOKEN } from './constants';
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
-import HomePage from './pages/index';
+import { defaultStore } from "./store";
+import reducers from "./store/reducers";
+
+import EditProfilePage from './pages/EditProfilePage';
+import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import AddCoursePage from './pages/AddCoursePage';
-import ProfilePage from './pages/ProfilePage';
-import EditProfilePage from './pages/EditProfilePage';
-import Header from './components/Header';
+
+
+import Header from "./components/Header";
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/api',
   fetchOptions: {
-    credentials: 'include'
-  },
-  request: async (operation) => {
-    const token = await localStorage.getItem(AUTH_TOKEN);
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : "",
-      }
-    });
+    credentials: "include",
   },
   onError: ({ graphQLErrors, networkError }) => {
     // Do something with the errors lol
-  }
+  },
+  uri: "http://localhost:4000/api",
 });
+
+const store = createStore(reducers, defaultStore as any);
 
 export default class Root extends React.Component {
   public render(): JSX.Element {
     return (
-      <BrowserRouter>
-        <ApolloProvider client={client}>
-          <Header/>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/login" component={withRouter(LoginPage)} />
-
-            <Route path="/signup" component={withRouter(SignUpPage)} />
-            <Route path="/addcourse" component={withRouter(AddCoursePage)} />
-            <Route path="/profile" component={withRouter(ProfilePage)} />
-            <Route path="/editprofile" component={withRouter(EditProfilePage)} />
-          </Switch>
-        </ApolloProvider>
-      </BrowserRouter>
-    )
+      <Provider store={store}>
+        <BrowserRouter>
+          <ApolloProvider client={client}>
+            <Header />
+            <Switch>
+              <Route exact={true} path="/" component={HomePage} />
+              <Route path="/login" component={withRouter(LoginPage as any)} />
+              <Route path="/signup" component={withRouter(SignUpPage as any)} />
+              <Route path="/editprofile" component={withRouter(EditProfilePage as any)} />
+              <Route path="/addcourse" component={withRouter(AddCoursePage as any)} />
+            </Switch>
+          </ApolloProvider>
+        </BrowserRouter>
+      </Provider>
+    );
   }
 }

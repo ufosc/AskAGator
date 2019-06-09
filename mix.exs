@@ -10,7 +10,9 @@ defmodule AskAGator.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: ["coveralls.json": :test]
     ]
   end
 
@@ -44,10 +46,12 @@ defmodule AskAGator.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:comeonin, "~> 5.0"},
-      {:argon2_elixir, "~> 2.0"},
-      {:guardian, "~> 1.0"},
+      {:bcrypt_elixir, "~> 2.0"},
       {:absinthe_plug, "~> 1.4.0"},
-      {:poison, "~> 3.1"}
+      {:poison, "~> 4.0"},
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:puid, "~> 1.0"}
     ]
   end
 

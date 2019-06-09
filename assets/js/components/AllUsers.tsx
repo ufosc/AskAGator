@@ -1,15 +1,16 @@
-import * as React from 'react'
-import { Query } from "react-apollo";
+import * as React from "react";
+
 import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
 const AllUsers = () => (
-    <Query
+  <Query
     query={gql`
       {
         allUsers {
-            id
-            name
-            email
+          id
+          name
+          email
         }
       }
     `}
@@ -18,13 +19,17 @@ const AllUsers = () => (
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
 
-      return data.allUsers.map(({id, name, email} : { id: string, name: string, email: string }) => (
-        <div key={id}>
-          <p>{name}: {email}</p>
-        </div>
-      ));
+      return data.allUsers.map(
+        ({ id, name, email }: { id: string; name: string; email: string }) => (
+          <div key={id}>
+            <p>
+              {name}: {email}
+            </p>
+          </div>
+        )
+      );
     }}
   </Query>
-)
+);
 
-export default AllUsers
+export default AllUsers;

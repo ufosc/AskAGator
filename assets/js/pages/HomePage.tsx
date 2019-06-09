@@ -1,17 +1,17 @@
 import * as React from 'react'
-import { RouteComponentProps } from 'react-router-dom'
-import Main from '../components/Main'
+
 import AllUsers from '../components/AllUsers'
+import Main from '../components/Main'
 
 class HomePage extends React.Component {
-    render() {
+    public render() {
         return (
             <Main>
                 Hello These are all the users retrieved using a GraphQL Query!!!!!
-                <AllUsers></AllUsers>
+                <AllUsers/>
             </Main>
         );
     }
 };
 
-export default HomePage
+export default HomePage;
