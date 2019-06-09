@@ -18,6 +18,7 @@ import AddCoursePage from './pages/AddCoursePage';
 
 
 import Header from "./components/Header";
+import ProfilePage from "./pages/ProfilePage";
 
 const client = new ApolloClient({
   fetchOptions: {
@@ -44,6 +45,7 @@ export default class Root extends React.Component {
               <Route path="/signup" component={withRouter(SignUpPage as any)} />
               <Route path="/editprofile" component={withRouter(EditProfilePage as any)} />
               <Route path="/addcourse" component={withRouter(AddCoursePage as any)} />
+              <Route path="/profile" component={withRouter(ProfilePage as any)} />
             </Switch>
           </ApolloProvider>
         </BrowserRouter>
