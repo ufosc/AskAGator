@@ -17,6 +17,9 @@ import SignUpPage from './pages/SignUpPage';
 import AddCoursePage from './pages/AddCoursePage';
 
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "@material-ui/styles";
+
+import MainTheme from "./styles/MainTheme";
 
 import Header from "./components/Header";
 import ProfilePage from "./pages/ProfilePage";
@@ -40,6 +43,7 @@ export default class Root extends React.Component {
         <BrowserRouter>
           <ApolloProvider client={client}>
             <CssBaseline />
+            <ThemeProvider theme={MainTheme}>
             <Header />
             <Switch>
               <Route exact={true} path="/" component={HomePage} />
@@ -49,6 +53,7 @@ export default class Root extends React.Component {
               <Route path="/addcourse" component={withRouter(AddCoursePage as any)} />
               <Route path="/profile" component={withRouter(ProfilePage as any)} />
             </Switch>
+            </ThemeProvider>
           </ApolloProvider>
         </BrowserRouter>
       </Provider>
