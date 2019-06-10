@@ -5,13 +5,8 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles,
-} from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
+import { makeStyles } from "@material-ui/styles";
 
 import React from "react";
 import { Link } from "react-router-dom";
@@ -20,68 +15,64 @@ import { connect } from "react-redux";
 
 import { IUser } from "../models/user";
 
-const styles = (theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    grow: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginLeft: -12,
-      marginRight: 20,
-    },
-  });
+const useStyles = makeStyles({
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+  root: {
+    flexGrow: 1,
+  },
+});
 
-const HomeLink = (props: Props) => <Link to="/" {...props} />;
-const LoginLink = (props: Props) => <Link to="/login" {...props} />;
+const HomeLink = (props: IButtonAppBarProps) => <Link to="/" {...props} />;
+const LoginLink = (props: IButtonAppBarProps) => <Link to="/login" {...props} />;
 
-export interface Props extends WithStyles<typeof styles> {
+export interface IButtonAppBarProps {
   user: IUser;
 }
 
-const ButtonAppBar = withStyles(styles)(
-  class extends React.Component<Props> {
-    render() {
-      const { classes, user } = this.props;
+const ButtonAppBar: React.FC<IButtonAppBarProps> = (props: IButtonAppBarProps) => {
+  const { user } = props;
+  const classes = useStyles();
 
-      let loginBtn;
+  let loginBtn;
 
-      if (!user.exists) {
-        loginBtn = (
-          <Button color="inherit" component={LoginLink as any}>
-            Login
-          </Button>
-        );
-      } else {
-        loginBtn = (
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            {user.email}
-          </Typography>
-        );
-      }
-
-      return (
-        <AppBar position="static" style={{ margin: 0 }}>
-          <Toolbar>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Menu"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              Ask a Gator
-            </Typography>
-            {loginBtn}
-          </Toolbar>
-        </AppBar>
-      );
-    }
+  if (!user.exists) {
+    loginBtn = (
+      <Button color="inherit" component={LoginLink as any}>
+        Login
+      </Button>
+    );
+  } else {
+    loginBtn = (
+      <Typography variant="h6" color="inherit" className={classes.grow}>
+        {user.email}
+      </Typography>
+    );
   }
-);
+
+  return (
+    <AppBar position="static" color="primary">
+      <Toolbar>
+        <IconButton
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="Menu"
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" color="inherit" className={classes.grow}>
+          Ask a Gator
+        </Typography>
+        {loginBtn}
+      </Toolbar>
+    </AppBar>
+  );
+};
 
 function matchStateToProps(state: any) {
   const { auth } = state;
