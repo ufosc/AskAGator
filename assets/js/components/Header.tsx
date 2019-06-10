@@ -1,47 +1,61 @@
-import * as React from 'react'
-import { Query } from "react-apollo";
+import * as React from "react";
+
 import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
-import { connect } from 'react-redux'
-import { IUser } from '../models/user';
-import { loginAct } from '../store/actions/auth';
 
-import ButtonAppBar from './ButtonAppBar';
+import { connect } from "react-redux";
+import { IUser } from "../models/user";
+import { loginAct } from "../store/actions/auth";
 
-interface HeaderProps {
-  loginAct: (user: IUser) => any
+import ButtonAppBar from "./ButtonAppBar";
+
+interface IHeaderProps {
+  loginAct: (user: IUser) => any;
 }
 
-class Header extends React.Component<HeaderProps> {
-
-  GET_PROFILE = gql`
-    {
-      profile {
-        email
-        name
-      }
-    }
-  `;
-
-  render() {
-    return (
-      <Query query={this.GET_PROFILE}>
-        {({ loading, error, data }) => {
-          if (!error && !loading) {
-            this.props.loginAct({ email: data.profile.email, first_name: data.profile.name, last_name: data.profile.name, exists: true });
-          }
-          return <ButtonAppBar />
-        }}
-      </Query>
-    )
+interface IGetProfile {
+  profile: {
+    email: string,
+    name: string,
   }
 }
+
+const GET_PROFILE = gql`
+  {
+    profile {
+      email
+      name
+    }
+  }
+`;
+
+const Header: React.FC<IHeaderProps> = (props: IHeaderProps) => {
+  return (
+    <Query<IGetProfile> query={GET_PROFILE}>
+      {({ loading, error, data }) => {
+        if (!error && !loading && data) {
+          props.loginAct({
+            email: data.profile.email,
+            exists: true,
+            firstName: data.profile.name,
+            lastName: data.profile.name,
+          });
+        }
+        return <ButtonAppBar />;
+      }}
+    </Query>
+  );
+};
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
+    dispatch,
     loginAct: (user: IUser) => dispatch(loginAct(user)),
-    dispatch
-  }
-}
+  };
+};
 
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Header);
