@@ -36,14 +36,13 @@ const client = new ApolloClient({
 
 const store = createStore(reducers, defaultStore as any);
 
-export default class Root extends React.Component {
-  public render(): JSX.Element {
-    return (
-      <Provider store={store}>
-        <BrowserRouter>
-          <ApolloProvider client={client}>
-            <CssBaseline />
-            <ThemeProvider theme={MainTheme}>
+const Root: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <ApolloProvider client={client}>
+          <CssBaseline />
+          <ThemeProvider theme={MainTheme}>
             <Header />
             <Switch>
               <Route exact={true} path="/" component={HomePage} />
@@ -53,10 +52,11 @@ export default class Root extends React.Component {
               <Route path="/addcourse" component={withRouter(AddCoursePage as any)} />
               <Route path="/profile" component={withRouter(ProfilePage as any)} />
             </Switch>
-            </ThemeProvider>
-          </ApolloProvider>
-        </BrowserRouter>
-      </Provider>
-    );
-  }
+          </ThemeProvider>
+        </ApolloProvider>
+      </BrowserRouter>
+    </Provider>
+  );
 }
+
+export default Root;
