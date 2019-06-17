@@ -4,15 +4,11 @@ import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
 
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { IUser } from "../models/user";
 import { loginAct } from "../store/actions/auth";
 
 import ButtonAppBar from "./ButtonAppBar";
-
-interface IHeaderProps {
-  loginAct: (user: IUser) => any;
-}
 
 interface IGetProfile {
   profile: {
@@ -30,17 +26,19 @@ const GET_PROFILE = gql`
   }
 `;
 
-const Header: React.FC<IHeaderProps> = (props: IHeaderProps) => {
+const Header: React.FC = () => {
+  const dispatch = useDispatch();
+
   return (
     <Query<IGetProfile> query={GET_PROFILE}>
       {({ loading, error, data }) => {
         if (!error && !loading && data) {
-          props.loginAct({
+          dispatch(loginAct({
             email: data.profile.email,
             exists: true,
             firstName: data.profile.name,
             lastName: data.profile.name,
-          });
+          }));
         }
         return <ButtonAppBar />;
       }}
@@ -48,14 +46,4 @@ const Header: React.FC<IHeaderProps> = (props: IHeaderProps) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    dispatch,
-    loginAct: (user: IUser) => dispatch(loginAct(user)),
-  };
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Header);
+export default Header;
