@@ -1,17 +1,13 @@
-import * as React from 'react'
+import React from 'react';
 
-import AllUsers from '../components/AllUsers'
-import Main from '../components/Main'
+import Main from '../components/Main';
 
-class HomePage extends React.Component {
-    public render() {
-        return (
-            <Main>
-                Hello These are all the users retrieved using a GraphQL Query!!!!!
-                <AllUsers/>
-            </Main>
-        );
-    }
-};
+const HomePage: React.FC = () => {
+    return (
+        <Main>
+            Hello
+        </Main>
+    );
+}
 
 export default HomePage;

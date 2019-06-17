@@ -1,47 +1,49 @@
-import * as React from 'react'
-import { Query } from "react-apollo";
+import * as React from "react";
+
 import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
-import { connect } from 'react-redux'
-import { IUser } from '../models/user';
-import { loginAct } from '../store/actions/auth';
 
-import ButtonAppBar from './ButtonAppBar';
+import { useDispatch } from "react-redux";
+import { IUser } from "../models/user";
+import { loginAct } from "../store/actions/auth";
 
-interface HeaderProps {
-  loginAct: (user: IUser) => any
+import ButtonAppBar from "./ButtonAppBar";
+
+interface IGetProfile {
+  profile: {
+    email: string,
+    name: string,
+  }
 }
 
-class Header extends React.Component<HeaderProps> {
-
-  GET_PROFILE = gql`
-    {
-      profile {
-        email
-        name
-      }
+const GET_PROFILE = gql`
+  {
+    profile {
+      email
+      name
     }
-  `;
-
-  render() {
-    return (
-      <Query query={this.GET_PROFILE}>
-        {({ loading, error, data }) => {
-          if (!error && !loading) {
-            this.props.loginAct({ email: data.profile.email, first_name: data.profile.name, last_name: data.profile.name, exists: true });
-          }
-          return <ButtonAppBar />
-        }}
-      </Query>
-    )
   }
-}
+`;
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    loginAct: (user: IUser) => dispatch(loginAct(user)),
-    dispatch
-  }
-}
+const Header: React.FC = () => {
+  const dispatch = useDispatch();
 
-export default connect(null, mapDispatchToProps)(Header);
+  return (
+    <Query<IGetProfile> query={GET_PROFILE}>
+      {({ loading, error, data }) => {
+        if (!error && !loading && data) {
+          dispatch(loginAct({
+            email: data.profile.email,
+            exists: true,
+            firstName: data.profile.name,
+            lastName: data.profile.name,
+          }));
+        }
+        return <ButtonAppBar />;
+      }}
+    </Query>
+  );
+};
+
+export default Header;

@@ -16,6 +16,10 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import AddCoursePage from './pages/AddCoursePage';
 
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "@material-ui/styles";
+
+import MainTheme from "./styles/MainTheme";
 
 import Header from "./components/Header";
 import ProfilePage from "./pages/ProfilePage";
@@ -32,12 +36,13 @@ const client = new ApolloClient({
 
 const store = createStore(reducers, defaultStore as any);
 
-export default class Root extends React.Component {
-  public render(): JSX.Element {
-    return (
-      <Provider store={store}>
-        <BrowserRouter>
-          <ApolloProvider client={client}>
+const Root: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <ApolloProvider client={client}>
+          <CssBaseline />
+          <ThemeProvider theme={MainTheme}>
             <Header />
             <Switch>
               <Route exact={true} path="/" component={HomePage} />
@@ -47,9 +52,11 @@ export default class Root extends React.Component {
               <Route path="/addcourse" component={withRouter(AddCoursePage as any)} />
               <Route path="/profile" component={withRouter(ProfilePage as any)} />
             </Switch>
-          </ApolloProvider>
-        </BrowserRouter>
-      </Provider>
-    );
-  }
+          </ThemeProvider>
+        </ApolloProvider>
+      </BrowserRouter>
+    </Provider>
+  );
 }
+
+export default Root;

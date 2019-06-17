@@ -1,20 +1,21 @@
 import * as React from 'react'
+
+import { Link, Theme } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { WithStyles, createStyles, Theme, withStyles } from '@material-ui/core';
-import CourseList from '../components/CourseList'
-import gql from "graphql-tag";
-import { Query } from 'react-apollo';
+import { makeStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) => createStyles({
+import ProfileData from '../components/ProfileData';
+
+const useStyles = makeStyles((theme: Theme) => ({
   main: {
     width: 'auto',
     display: 'block', // Fix IE 11 issue.
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-    width: 400,
-    marginLeft: 'left',
+      width: 400,
+      marginLeft: 'left',
     },
   },
   courses: {
@@ -22,70 +23,30 @@ const styles = (theme: Theme) => createStyles({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   }
-});
+}));
 
-interface Props extends WithStyles<typeof styles> {
-}
+const EditProfileLink = (props: any) => <Link to="/login" {...props} />;
 
-const ProfilePage = withStyles(styles)(
-  class extends React.Component<Props> {
-    HandleClick = () => {
-      location.href = "/editprofile"
-    };
+const ProfilePage: React.FC = () => {
+  const classes = useStyles();
 
-    Profile = () => (
-      <Query
-      query={gql`
-        {
-          profile {
-              name
-              email
-          }
-        }
-      `}
-    >
-      {({ loading, error, data }) => {
-        if (loading) return <p>Loading...</p>;
-        if (error) return <p>Error :(</p>;
-  
-        return (
-          <div>
-            <Typography component="h1" variant="h5">
-              name : {data.profile.name}
-            </Typography>
-            <Typography component="h1" variant="h5">
-              email : {data.profile.email}
-            </Typography>
-          </div>
-        );
-      }}
-    </Query>
-  )
-
-    render() {
-      const { classes } = this.props;
-      return (
-        <main className={classes.main}>
-        <Typography component="h1" variant="h5">
+  return (
+    <main className={classes.main}>
+      <Typography component="h1" variant="h5">
         Profile
         </Typography>
-        {this.Profile()}
-        <Typography component="h1" variant="h5">
+      <ProfileData />
+      <Typography component="h1" variant="h5">
         Classes stub
         </Typography>
-        {/* <CourseList/> */}
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          onClick={this.HandleClick}
-        >
+      {/* <CourseList/> */}
+      <Button
+        component={EditProfileLink as any}
+      >
         Edit Profile
         </Button>
-        </main>
-      );
-    }
-  }
-);
+    </main>
+  );
+}
 
-export default ProfilePage
+export default ProfilePage;
