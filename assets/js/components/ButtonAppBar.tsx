@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 
 const HomeLink = (props: any) => <Link to="/" {...props} />;
 const LoginLink = (props: any) => <Link to="/login" {...props} />;
+const ProfileLink = (props: any) => <Link to="/profile" {...props} />;
 
 const ButtonAppBar: React.FC = () => {
   const auth: IUser = useSelector((state: any) => ({ ...state.auth }));
@@ -44,9 +45,9 @@ const ButtonAppBar: React.FC = () => {
     );
   } else {
     loginBtn = (
-      <Typography variant="h6" color="inherit" className={classes.grow}>
+      <Button color="inherit" style={{textTransform: "none"}} component={ProfileLink as any}>
         {auth.email}
-      </Typography>
+      </Button>
     );
   }
 
