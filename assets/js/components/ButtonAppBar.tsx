@@ -11,8 +11,7 @@ import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { connect } from "react-redux";
-
+import { useSelector } from "react-redux";
 import { IUser } from "../models/user";
 
 const useStyles = makeStyles({
@@ -28,20 +27,16 @@ const useStyles = makeStyles({
   },
 });
 
-const HomeLink = (props: IButtonAppBarProps) => <Link to="/" {...props} />;
-const LoginLink = (props: IButtonAppBarProps) => <Link to="/login" {...props} />;
+const HomeLink = (props: any) => <Link to="/" {...props} />;
+const LoginLink = (props: any) => <Link to="/login" {...props} />;
 
-export interface IButtonAppBarProps {
-  user: IUser;
-}
-
-const ButtonAppBar: React.FC<IButtonAppBarProps> = (props: IButtonAppBarProps) => {
-  const { user } = props;
+const ButtonAppBar: React.FC = () => {
+  const auth: IUser = useSelector((state: any) => ({ ...state.auth }));
   const classes = useStyles();
 
   let loginBtn;
 
-  if (!user.exists) {
+  if (!auth.exists) {
     loginBtn = (
       <Button color="inherit" component={LoginLink as any}>
         Login
@@ -50,7 +45,7 @@ const ButtonAppBar: React.FC<IButtonAppBarProps> = (props: IButtonAppBarProps) =
   } else {
     loginBtn = (
       <Typography variant="h6" color="inherit" className={classes.grow}>
-        {user.email}
+        {auth.email}
       </Typography>
     );
   }
@@ -74,12 +69,4 @@ const ButtonAppBar: React.FC<IButtonAppBarProps> = (props: IButtonAppBarProps) =
   );
 };
 
-function matchStateToProps(state: any) {
-  const { auth } = state;
-
-  return {
-    user: auth,
-  };
-}
-
-export default connect(matchStateToProps)(ButtonAppBar);
+export default ButtonAppBar;
