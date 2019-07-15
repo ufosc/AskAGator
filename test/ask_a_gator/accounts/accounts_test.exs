@@ -5,6 +5,8 @@ defmodule AskAGator.AccountsTest do
   use AskAGator.DataCase
 
   alias AskAGator.Accounts
+  alias AskAGator.Courses
+  alias AskAGator.Repo
 
   describe "users" do
     alias AskAGator.Accounts.User
@@ -31,6 +33,12 @@ defmodule AskAGator.AccountsTest do
       password_confirmation: "some"
     }
 
+
+    @course_attrs %{
+      code: "COP1234",
+      name: "Programming Fundamentals 12"
+    }
+
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
         attrs
@@ -38,6 +46,15 @@ defmodule AskAGator.AccountsTest do
         |> Accounts.create_user()
 
       user
+    end
+
+    def course_fixture(attrs \\ %{}) do
+      {:ok, course} =
+        attrs
+        |> Enum.into(@course_attrs)
+        |> Courses.create_course()
+
+      course
     end
 
     test "changeset/2 is valid with @valid_attrs" do
@@ -114,6 +131,29 @@ defmodule AskAGator.AccountsTest do
       _user1 = user_fixture(%{token: "test"})
       user2 = user_fixture(%{email: "test2@test.com"})
       assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user2, %{token: "test"})
+    end
+
+    test "add_course/2 adds a course to a user" do
+      user = user_fixture()
+      course = course_fixture()
+
+      User.add_course(user, course)
+      user = Repo.preload(user, :courses)
+
+      assert [course] = user.courses
+    end
+
+    test "add_course/2 adds multiple courses to a user" do
+      user = user_fixture()
+      course_1 = course_fixture()
+      course_2 = course_fixture()
+
+      User.add_course(user, course_1)
+      User.add_course(user, course_2)
+
+      user = Repo.preload(user, :courses)
+      assert course_1 in user.courses
+      assert course_2 in user.courses
     end
   end
 end
