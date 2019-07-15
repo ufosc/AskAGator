@@ -1,10 +1,14 @@
 defmodule AskAGator.Accounts.User do
   use Ecto.Schema
+
   import Ecto.Changeset
 
   import Bcrypt, only: [hash_pwd_salt: 1]
 
   alias AskAGator.Accounts.User
+  alias AskAGator.Accounts.UserCourse
+  alias AskAGator.Courses.Course
+  alias AskAGator.Repo
 
   schema "users" do
     field :email, :string
@@ -15,6 +19,8 @@ defmodule AskAGator.Accounts.User do
     field(:token, :string)
 
     timestamps()
+
+    many_to_many :courses, AskAGator.Courses.Course, join_through: UserCourse
   end
 
   @doc false
@@ -33,6 +39,19 @@ defmodule AskAGator.Accounts.User do
   def store_token_changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [:token])
+  end
+
+  def add_course(%User{} = user, %Course{} = course) do
+    user = Repo.preload(user, :courses)
+
+    courses =
+      (user.courses ++ [course])
+      |> Enum.map(&Ecto.Changeset.change/1)
+
+    user
+    |> Ecto.Changeset.change
+    |> Ecto.Changeset.put_assoc(:courses, courses)
+    |> Repo.update
   end
 
   defp put_password_hash(changeset) do

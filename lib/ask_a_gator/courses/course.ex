@@ -3,6 +3,7 @@ defmodule AskAGator.Courses.Course do
   import Ecto.Changeset
   import Puid
 
+  alias AskAGator.Accounts.UserCourse
   alias AskAGator.Courses.Course
 
   schema "courses" do
@@ -11,24 +12,30 @@ defmodule AskAGator.Courses.Course do
     field :join_code, :string
 
     timestamps()
+
+    many_to_many :users, AskAGator.Accounts.User, join_through: UserCourse
   end
 
   @doc false
   def changeset(%Course{} = course, attrs) do
     course
-    |> cast(attrs, [:name, :code])
+    |> cast(attrs, [:name, :code, :join_code])
     |> validate_required([:name, :code])
-    |> unique_constraint(:join_code)
     |> put_join_code
+    |> unique_constraint(:join_code)
   end
 
-  defmodule(CourseUUID, do: use(Puid, charset: :alphanum_lower, total: 1.0e4, risk: 1.0e8))
+  defmodule(CourseUUID, do: use(Puid, charset: :alphanum_upper, total: 1.0e4, risk: 1.0e8))
 
   defp put_join_code(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true} ->
-        put_change(changeset, :join_code, CourseUUID.generate())
-
+        case get_field(changeset, :join_code) do
+          nil ->
+            put_change(changeset, :join_code, CourseUUID.generate())
+          _ ->
+            changeset
+        end
       _ ->
         changeset
     end
