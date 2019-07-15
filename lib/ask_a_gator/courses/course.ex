@@ -3,6 +3,7 @@ defmodule AskAGator.Courses.Course do
   import Ecto.Changeset
   import Puid
 
+  alias AskAGator.Accounts.UserCourse
   alias AskAGator.Courses.Course
 
   schema "courses" do
@@ -12,7 +13,7 @@ defmodule AskAGator.Courses.Course do
 
     timestamps()
 
-    many_to_many :users, AskAGator.Accounts.User, join_through: "user_course"
+    many_to_many :users, AskAGator.Accounts.User, join_through: UserCourse
   end
 
   @doc false

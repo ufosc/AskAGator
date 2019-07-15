@@ -1,12 +1,14 @@
 defmodule AskAGator.Accounts.User do
   use Ecto.Schema
+
   import Ecto.Changeset
-  import Ecto.Query
 
   import Bcrypt, only: [hash_pwd_salt: 1]
 
   alias AskAGator.Accounts.User
+  alias AskAGator.Accounts.UserCourse
   alias AskAGator.Courses.Course
+  alias AskAGator.Repo
 
   schema "users" do
     field :email, :string
@@ -18,7 +20,7 @@ defmodule AskAGator.Accounts.User do
 
     timestamps()
 
-    many_to_many :courses, AskAGator.Courses.Course, join_through: "user_course"
+    many_to_many :courses, AskAGator.Courses.Course, join_through: UserCourse
   end
 
   @doc false
@@ -39,24 +41,17 @@ defmodule AskAGator.Accounts.User do
     |> cast(attrs, [:token])
   end
 
-  def update_courses_changeset(%User{} = user, courses) do
+  def add_course(%User{} = user, %Course{} = course) do
+    user = Repo.preload(user, :courses)
+
+    courses =
+      (user.courses ++ [course])
+      |> Enum.map(&Ecto.Changeset.change/1)
+
     user
-    |> cast(%{}, [:courses])
-    |> put_assoc(:courses, courses)
-  end
-
-  def upsert_user_courses(user, course_ids) when is_list(course_ids) do
-    courses = Repo.all(from(course in Course, where: course.id in ^course_ids))
-
-    with {:ok, _struct} <-
-      user
-      |> AskAGator.Accounts.User.update_courses_changeset(courses)
-      |> Repo.update() do
-        {:ok, AskAGator.Accounts.get_user!(user.id)}
-      else
-        error ->
-          error
-      end
+    |> Ecto.Changeset.change
+    |> Ecto.Changeset.put_assoc(:courses, courses)
+    |> Repo.update
   end
 
   defp put_password_hash(changeset) do
