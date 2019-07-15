@@ -11,6 +11,8 @@ defmodule AskAGator.Courses.Course do
     field :join_code, :string
 
     timestamps()
+
+    many_to_many :users, AskAGator.Accounts.User, join_through: "user_course"
   end
 
   @doc false
