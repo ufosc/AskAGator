@@ -1,7 +1,7 @@
+import { useQuery } from "@apollo/react-hooks";
 import { Typography } from "@material-ui/core";
 import { gql } from "apollo-boost";
 import React from "react";
-import { Query } from "react-apollo";
 
 const GET_PROFILE = gql`
 {
@@ -13,28 +13,25 @@ const GET_PROFILE = gql`
 `;
 
 const ProfileData: React.FC = () => {
+    const { loading, error, data } = useQuery(GET_PROFILE);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+    if (error){
+        return <p>Error :(</p>;
+    } 
 
     return (
-        <Query
-            query={GET_PROFILE}
-        >
-            {({ loading, error, data }: any) => {
-                if (loading) return <p>Loading...</p>;
-                if (error) return <p>Error :(</p>;
-
-                return (
-                    <div>
-                        <Typography component="h1" variant="h5">
-                            name : {data.profile.name}
-                        </Typography>
-                        <Typography component="h1" variant="h5">
-                            email : {data.profile.email}
-                        </Typography>
-                    </div>
-                );
-            }}
-        </Query>
-    )
+        <>
+        <Typography component="h1" variant="h5">
+            name : {data.profile.name}
+        </Typography>
+        <Typography component="h1" variant="h5">
+            email : {data.profile.email}
+        </Typography>
+        </>
+    );
 }
 
 export default ProfileData;
