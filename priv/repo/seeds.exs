@@ -10,6 +10,8 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 alias AskAGator.Accounts.User
+alias AskAGator.Courses.Course
 
 AskAGator.Repo.insert! User.changeset(%User{}, %{name: "Test", email: "test@test.com", password: "password", password_confirmation: "password"})
 AskAGator.Repo.insert! User.changeset(%User{}, %{name: "Test2", email: "test2@test.com", password: "password", password_confirmation: "password"})
+AskAGator.Repo.insert! Course.changeset(%Course{}, %{code: "COP1234", name: "Programming 1234", join_code: "testcode"})
