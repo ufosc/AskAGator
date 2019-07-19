@@ -8,6 +8,7 @@
     "lint": "tslint assets/js/**/*.tsx"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^0.1.0-beta.11",
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "^4.2.0",
