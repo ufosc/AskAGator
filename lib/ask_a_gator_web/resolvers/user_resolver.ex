@@ -1,5 +1,6 @@
 defmodule AskAGatorWeb.UserResolver do
   alias AskAGator.Accounts.User
+  alias AskAGator.Courses
   alias AskAGator.Repo
   alias AskAGator.Services.Authenticator
 
@@ -52,4 +53,19 @@ defmodule AskAGatorWeb.UserResolver do
   def signed_in?(_root, _info) do
     {:ok, false}
   end
+
+  def join_course(%{join_code: join_code}, %{context: %{current_user: c}}) do
+    case Courses.get_course_by_join(join_code) do
+      nil ->
+        {:error, "Invalid join code"}
+      course ->
+        User.add_course(c, course)
+        {:ok, course.code}
+    end
+  end
+
+  def join_course(%{join_code: join_code}, _info) do
+    {:error, "Not Signed In"}
+  end
+
 end

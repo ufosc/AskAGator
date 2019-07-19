@@ -48,5 +48,10 @@ defmodule AskAGatorWeb.Schema do
         end
       end
     end
+
+    field :join_course, type: :string do
+      arg(:join_code, non_null(:string))
+      resolve(&UserResolver.join_course/2)
+    end
   end
 end
