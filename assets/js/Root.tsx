@@ -14,7 +14,7 @@ import EditProfilePage from './pages/EditProfilePage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
-import AddCoursePage from './pages/AddCoursePage';
+import JoinCoursePage from './pages/JoinCoursePage';
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/styles";
@@ -49,7 +49,7 @@ const Root: React.FC = () => {
               <Route path="/login" component={withRouter(LoginPage as any)} />
               <Route path="/signup" component={withRouter(SignUpPage as any)} />
               <Route path="/editprofile" component={withRouter(EditProfilePage as any)} />
-              <Route path="/addcourse" component={withRouter(AddCoursePage as any)} />
+              <Route path="/join" component={withRouter(JoinCoursePage as any)} />
               <Route path="/profile" component={withRouter(ProfilePage as any)} />
             </Switch>
           </ThemeProvider>

@@ -45,10 +45,10 @@ const styles = (theme: Theme) => createStyles({
 interface Props extends WithStyles<typeof styles> {
 }
 
-const AddCoursePage = withStyles(styles)(
+const JoinCoursePage = withStyles(styles)(
     class extends React.Component<Props> {
 
-        addCourse() {
+        joinCourse() {
             console.log("Add a Course")
         }
 
@@ -74,7 +74,7 @@ const AddCoursePage = withStyles(styles)(
                             variant="contained"
                             color="primary"
                             className={classes.submit}
-                            onClick={this.addCourse}
+                            onClick={this.joinCourse}
                         >
                             Add course
                         </Button>
@@ -86,4 +86,4 @@ const AddCoursePage = withStyles(styles)(
     }
 );
 
-export default AddCoursePage
+export default JoinCoursePage
