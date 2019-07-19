@@ -37,6 +37,22 @@ defmodule AskAGator.Courses do
   """
   def get_course!(id), do: Repo.get!(Course, id)
 
+    @doc """
+  Gets a single course by the join_code.
+
+  Returns nil if the Course does not exist.
+
+  ## Examples
+
+      iex> get_course!('ABEF123')
+      %Course{}
+
+      iex> get_course!('ZZZZZZ1')
+      nil
+
+  """
+  def get_course_by_join(join_code), do: Repo.get_by(Course, join_code: join_code)
+
   @doc """
   Creates a course.
 
