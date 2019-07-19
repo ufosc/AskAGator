@@ -1,89 +1,84 @@
-import * as React from 'react'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import NoteAdd from '@material-ui/icons/NoteAddOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { WithStyles, createStyles, Theme, withStyles } from '@material-ui/core';
+import NoteAdd from '@material-ui/icons/NoteAddOutlined';
 
-const styles = (theme: Theme) => createStyles({
-    main: {
-        width: 'auto',
-        display: 'block', // Fix IE 11 issue.
-        marginLeft: theme.spacing.unit * 3,
-        marginRight: theme.spacing.unit * 3,
-        [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-            width: 400,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
-    },
-    paper: {
-        marginTop: theme.spacing.unit * 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-    },
-    avatar: {
-        margin: theme.spacing.unit,
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing.unit,
-    },
-    submit: {
-        marginTop: theme.spacing.unit * 3,
-    },
-});
+import * as React from 'react';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 
-interface Props extends WithStyles<typeof styles> {
+import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+
+import CenteredForm from "../styles/CenteredForm";
+
+const JOIN_COURSE_MUTATION = gql`
+    mutation joinCourse($joinCode: String!) {
+        joinCourse(joinCode: $joinCode)
+    }
+`;
+
+const JoinCoursePage: React.FC = () => {
+    const [joinCode, setJoinCode] = React.useState("");
+    const auth = useSelector((state: any) => ({ ...state.auth }));
+    const classes = CenteredForm();
+    const [joinCourse, { error, data }] = useMutation(JOIN_COURSE_MUTATION, {
+        variables: { joinCode }
+    });
+
+    if (!auth.exists) {
+        return <Redirect to="/login" />;
+    }
+
+    const handleChange = (stateAction: React.Dispatch<React.SetStateAction<any>>) => (e: any) => {
+        stateAction(e.target.value);
+    }
+
+    const handleJoin = () => (event: React.MouseEvent) => {
+        event.preventDefault();
+        joinCourse();
+    }
+
+    if (data && data.joinCourse) {
+        return <Redirect to="/" />;
+    }
+
+    return (
+        <main className={classes.main}>
+            <CssBaseline />
+            <Paper className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <NoteAdd />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Join a Course
+                        </Typography>
+                {error ? (
+                    <div>Error Invalid JoinCode</div>
+                ): null}
+                <form className={classes.form}>
+                    <FormControl margin="normal" required={true} fullWidth={true}>
+                        <InputLabel htmlFor="joincode">Join Code</InputLabel>
+                        <Input id="joincode" name="joincode" autoFocus={true} onChange={handleChange(setJoinCode)}/>
+                    </FormControl>
+                    <Button
+                        fullWidth={true}
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        onClick={handleJoin()}
+                    >
+                        Add course
+                        </Button>
+                </form>
+            </Paper>
+        </main>
+    )
 }
 
-const JoinCoursePage = withStyles(styles)(
-    class extends React.Component<Props> {
-
-        joinCourse() {
-            console.log("Add a Course")
-        }
-
-        render() {
-            const { classes } = this.props;
-            return (
-                <main className={classes.main}>
-                    <CssBaseline />
-                    <Paper className={classes.paper}>
-                        <Avatar className={classes.avatar}>
-                        <NoteAdd />
-                        </Avatar>
-                        <Typography component="h1" variant="h5">
-                        Add a course
-                        </Typography>
-                        <form className={classes.form}>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="course">Course code</InputLabel>
-                            <Input id="course" name="course" autoComplete="course" autoFocus />
-                        </FormControl>
-                        <Button
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                            onClick={this.joinCourse}
-                        >
-                            Add course
-                        </Button>
-                        </form>
-                    </Paper>
-                    </main>
-            );
-        }
-    }
-);
-
-export default JoinCoursePage
+export default JoinCoursePage;

@@ -2,7 +2,7 @@ import * as React from "react";
 import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 
 import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider } from "@apollo/react-hooks";
 
 import { Provider } from "react-redux";
 import { createStore } from "redux";

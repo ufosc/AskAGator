@@ -1,3 +1,3 @@
 export const defaultStore = {
-  auth: { exists: false },
+  auth: { exists: true },
 };

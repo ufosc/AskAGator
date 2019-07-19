@@ -46,7 +46,7 @@ const ButtonAppBar: React.FC = () => {
   } else {
     loginBtn = (
       <Button color="inherit" style={{textTransform: "none"}} component={ProfileLink as any}>
-        {auth.email}
+        {auth.email ? auth.email : ""}
       </Button>
     );
   }
