@@ -5,7 +5,7 @@ import { Mutation } from "react-apollo";
 
 import gql from "graphql-tag";
 
-import { useDispatch, useSelector  } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 
 
 import { IUser } from "../models/user";
@@ -25,6 +25,7 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import CenteredForm from "../styles/CenteredForm";
+import { useMutation } from "@apollo/react-hooks";
 
 const LOGIN_MUTATION = gql`
   mutation login($email: String!, $password: String!) {
@@ -40,6 +41,12 @@ const LoginPage: React.FC = () => {
   const auth = useSelector((state: any) => ({ ...state.auth }));
   const dispatch = useDispatch();
   const classes = CenteredForm();
+  const [loginMutation, { error, data }] = useMutation(LOGIN_MUTATION, {
+    variables: {
+      email,
+      password,
+    },
+  });
 
   if (auth.exists) {
     return <Redirect to="/" />;
@@ -49,14 +56,9 @@ const LoginPage: React.FC = () => {
     stateAction(e.target.value);
   }
 
-  const handleLogin = (login: (any : any) => Promise<any>) => (event: React.MouseEvent) => {
+  const handleLogin = () => (event: React.MouseEvent) => {
     event.preventDefault();
-    login({
-      variables: {
-        email,
-        password,
-      },
-    }).then(() => {
+    loginMutation().then(() => {
       dispatch(loginAct({
         email,
         exists: true,
@@ -67,58 +69,54 @@ const LoginPage: React.FC = () => {
   }
 
   return (
-    <Mutation mutation={LOGIN_MUTATION}>
-      {(login: any, { error }: (any)) => (
-        <main className={classes.main}>
-          <Paper className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
+    <main className={classes.main}>
+      <Paper className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
                 </Typography>
-            {error && <p>Wrong username or password</p>}
-            <form className={classes.form}>
-              <FormControl margin="normal" required={true} fullWidth={true}>
-                <InputLabel htmlFor="email">Email Address</InputLabel>
-                <Input
-                  id="email"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus={true}
-                  value={email}
-                  onChange={handleChange(setEmail)}
-                />
-              </FormControl>
-              <FormControl margin="normal" required={true} fullWidth={true}>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input
-                  name="password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={handleChange(setPassword)}
-                />
-              </FormControl>
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                fullWidth={true}
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={handleLogin(login)}
-              >
-                Sign in
+        {error && <p>Wrong username or password</p>}
+        <form className={classes.form}>
+          <FormControl margin="normal" required={true} fullWidth={true}>
+            <InputLabel htmlFor="email">Email Address</InputLabel>
+            <Input
+              id="email"
+              name="email"
+              autoComplete="email"
+              autoFocus={true}
+              value={email}
+              onChange={handleChange(setEmail)}
+            />
+          </FormControl>
+          <FormControl margin="normal" required={true} fullWidth={true}>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <Input
+              name="password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={handleChange(setPassword)}
+            />
+          </FormControl>
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            fullWidth={true}
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={handleLogin()}
+          >
+            Sign in
                   </Button>
-            </form>
-          </Paper>
-        </main>
-      )}
-    </Mutation>
+        </form>
+      </Paper>
+    </main>
   );
 }
 

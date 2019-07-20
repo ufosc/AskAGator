@@ -5,7 +5,6 @@ import { useQuery } from "@apollo/react-hooks";
 
 
 import { useDispatch } from "react-redux";
-import { IUser } from "../models/user";
 import { loginAct } from "../store/actions/auth";
 
 import ButtonAppBar from "./ButtonAppBar";
@@ -30,7 +29,7 @@ const Header: React.FC = () => {
   const dispatch = useDispatch();
   const { loading, error, data } = useQuery<IGetProfile>(GET_PROFILE);
   
-  if (!error && !loading && data) {
+  if (!error && !loading && data && data.profile) {
     dispatch(loginAct({
       email: data.profile.email,
       exists: true,
