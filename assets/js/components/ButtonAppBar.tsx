@@ -37,7 +37,7 @@ const ButtonAppBar: React.FC = () => {
 
   let loginBtn;
 
-  if (!auth.exists) {
+  if (!auth.exists || auth.loading) {
     loginBtn = (
       <Button color="inherit" component={LoginLink as any}>
         Login
@@ -46,7 +46,7 @@ const ButtonAppBar: React.FC = () => {
   } else {
     loginBtn = (
       <Button color="inherit" style={{textTransform: "none"}} component={ProfileLink as any}>
-        {auth.hasOwnProperty('email') ? auth.email : ""}
+        {auth.email}
       </Button>
     );
   }

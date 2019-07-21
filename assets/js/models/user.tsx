@@ -3,4 +3,5 @@ export interface IUser {
   firstName?: string;
   lastName?: string;
   exists: boolean;
+  loading: boolean;
 }

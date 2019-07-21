@@ -35,11 +35,20 @@ const Header: React.FC = () => {
       exists: true,
       firstName: data.profile.name,
       lastName: data.profile.name,
+      loading: false,
     }));
   }
   if (error && !loading) {
     dispatch(loginAct({
       exists: false,
+      loading: false,
+    }));
+  }
+  
+  if (loading) {
+    dispatch(loginAct({
+      exists: false,
+      loading: true,
     }));
   }
 
