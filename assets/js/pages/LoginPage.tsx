@@ -109,6 +109,7 @@ const LoginPage: React.FC = () => {
             fullWidth={true}
             variant="contained"
             color="primary"
+            type="submit"
             className={classes.submit}
             onClick={handleLogin()}
           >
