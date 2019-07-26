@@ -9,6 +9,7 @@ describe("store.actions.auth", () => {
       exists: true,
       firstName: "Test",
       lastName: "Test",
+      loading: false,
     };
     const expectedAction = {
       type: AuthActions.AUTH_ACTIONS.LOGIN_ACT,
