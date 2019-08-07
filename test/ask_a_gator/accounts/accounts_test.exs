@@ -11,24 +11,27 @@ defmodule AskAGator.AccountsTest do
   describe "users" do
     alias AskAGator.Accounts.User
 
-    @valid_attrs %{email: "some@email.com", name: "some name", password: "some password", password_confirmation: "some password"}
-    @update_attrs %{email: "some@email.net", name: "some updated name", password: "some password", password_confirmation: "some password"}
-    @invalid_attrs %{email: nil, name: nil, password: nil, password_confirmation: nil, token: nil}
+    @valid_attrs %{email: "some@email.com", first_name: "some first name", last_name: "some last name", password: "some password", password_confirmation: "some password"}
+    @update_attrs %{email: "some@email.net", first_name: "some updated name", last_name: "some last name", password: "some password", password_confirmation: "some password"}
+    @invalid_attrs %{email: nil, first_name: nil, last_name: nil, password: nil, password_confirmation: nil, token: nil}
     @non_matching_password_attrs %{
       email: "some@email.com",
-      name: "some name",
+      first_name: "some name",
+      last_name: "some last name",
       password: "some password",
       password_confirmation: "not some password"
     }
     @invalid_email_attrs %{
       email: "some invalid email.com",
-      name: "some name",
+      first_name: "some name",
+      last_name: "some last name",
       password: "some password",
       password_confirmation: "some password"
     }
     @invalid_password_length_attrs %{
       email: "some@email.com",
-      name: "some name",
+      first_name: "some name",
+      last_name: "some last name",
       password: "some",
       password_confirmation: "some"
     }
@@ -75,7 +78,8 @@ defmodule AskAGator.AccountsTest do
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
       assert user.email == "some@email.com"
-      assert user.name == "some name"
+      assert user.first_name == "some first name"
+      assert user.last_name == "some last name"
       assert user.password == "some password"
       assert user.password_confirmation == "some password"
     end
@@ -88,7 +92,7 @@ defmodule AskAGator.AccountsTest do
       user = user_fixture()
       assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
       assert user.email == "some@email.net"
-      assert user.name == "some updated name"
+      assert user.first_name == "some updated name"
     end
 
     test "update_user/2 with invalid data returns error changeset" do

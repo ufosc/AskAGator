@@ -12,7 +12,8 @@ defmodule AskAGator.Accounts.User do
 
   schema "users" do
     field :email, :string
-    field :name, :string
+    field :first_name, :string
+    field :last_name, :string
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
     field :password_hash, :string
@@ -26,8 +27,8 @@ defmodule AskAGator.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :password, :password_confirmation, :token])
-    |> validate_required([:name, :email, :password, :password_confirmation])
+    |> cast(attrs, [:first_name, :last_name, :email, :password, :password_confirmation, :token])
+    |> validate_required([:first_name, :last_name, :email, :password, :password_confirmation])
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 8)
     |> validate_confirmation(:password)

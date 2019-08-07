@@ -12,7 +12,8 @@ import ButtonAppBar from "./ButtonAppBar";
 interface IGetProfile {
   profile: {
     email: string,
-    name: string,
+    first_name: string,
+    last_name: string,
   }
 }
 
@@ -20,7 +21,8 @@ const GET_PROFILE = gql`
   {
     profile {
       email
-      name
+      first_name
+      last_name
     }
   }
 `;
@@ -33,8 +35,8 @@ const Header: React.FC = () => {
     dispatch(loginAct({
       email: data.profile.email,
       exists: true,
-      firstName: data.profile.name,
-      lastName: data.profile.name,
+      firstName: data.profile.first_name,
+      lastName: data.profile.last_name,
       loading: false,
     }));
   }
