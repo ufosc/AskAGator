@@ -12,13 +12,13 @@ const styles = makeStyles((theme: Theme) => ({
   },
   main: {
     display: "block", // Fix IE 11 issue.
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
     width: "auto",
-    [theme.breakpoints.up(500 + theme.spacing.unit * 3 * 2)]: {
+    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
       marginLeft: "auto",
       marginRight: "auto",
-      width: 500,
+      width: 400,
     },
   },
   paper: {
@@ -26,7 +26,7 @@ const styles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     marginTop: theme.spacing.unit * 8,
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px ${theme
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
       .spacing.unit * 3}px`,
   },
   submit: {

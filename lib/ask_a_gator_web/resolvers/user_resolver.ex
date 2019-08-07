@@ -64,7 +64,7 @@ defmodule AskAGatorWeb.UserResolver do
     end
   end
 
-  def join_course(%{join_code: join_code}, _info) do
+  def join_course(%{join_code: _join_code}, _info) do
     {:error, "Not Signed In"}
   end
 

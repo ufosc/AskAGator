@@ -1,50 +1,40 @@
 import * as React from 'react'
 
-import { Link, Theme } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import { Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/styles';
 
-import ProfileData from '../components/ProfileData';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  main: {
-    width: 'auto',
-    display: 'block', // Fix IE 11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
-      marginLeft: 'left',
-    },
-  },
-  courses: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  }
-}));
+import { IUser } from '../models/user';
+import CenteredForm from '../styles/CenteredForm';
 
-const EditProfileLink = (props: any) => <Link to="/login" {...props} />;
 
 const ProfilePage: React.FC = () => {
-  const classes = useStyles();
+  const classes = CenteredForm();
+  const auth: IUser = useSelector((state: any) => ({ ...state.auth }));
+
+  if (!auth.exists && !auth.loading) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <main className={classes.main}>
-      <Typography component="h1" variant="h5">
-        Profile
+      <Paper className={classes.paper}>
+        <Typography component="h1" variant="h4">
+          Profile
         </Typography>
-      <ProfileData />
-      <Typography component="h1" variant="h5">
-        Classes stub
-        </Typography>
-      {/* <CourseList/> */}
-      <Button
-        component={EditProfileLink as any}
-      >
-        Edit Profile
-        </Button>
+        {auth.loading ? (<>Loading...</>) : (
+          <div>
+            <div>
+              Name:{` ${auth.firstName} ${auth.lastName}`}
+            </div>
+            <div>
+              Email: {` ${auth.email}`}
+            </div>
+          </div>
+        )}
+      </Paper>
     </main>
   );
 }
