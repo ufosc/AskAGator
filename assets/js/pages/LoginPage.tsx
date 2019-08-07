@@ -64,6 +64,7 @@ const LoginPage: React.FC = () => {
         exists: true,
         firstName: "",
         lastName: "",
+        loading: false,
       }));
     });
   }

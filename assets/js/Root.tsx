@@ -48,7 +48,6 @@ const Root: React.FC = () => {
               <Route exact={true} path="/" component={HomePage} />
               <Route path="/login" component={withRouter(LoginPage as any)} />
               <Route path="/signup" component={withRouter(SignUpPage as any)} />
-              <Route path="/editprofile" component={withRouter(EditProfilePage as any)} />
               <Route path="/join" component={withRouter(JoinCoursePage as any)} />
               <Route path="/profile" component={withRouter(ProfilePage as any)} />
             </Switch>
