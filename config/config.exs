@@ -7,15 +7,15 @@
 # General application configuration
 use Mix.Config
 
-config :ask_a_gator,
-  ecto_repos: [AskAGator.Repo]
+config :ask_a_gator_backend,
+  ecto_repos: [AskAGatorBackend.Repo]
 
 # Configures the endpoint
-config :ask_a_gator, AskAGatorWeb.Endpoint,
+config :ask_a_gator_backend, AskAGatorBackendWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "xIkpmfkE5CaT/r3rQe8kWHF8eakjkMzNooe0UMtOIPf4cPSvmJpIGEvitlZsqKZ3",
-  render_errors: [view: AskAGatorWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: AskAGator.PubSub, adapter: Phoenix.PubSub.PG2]
+  secret_key_base: "DdyOTtgPd8HmyFS1slRJYUUBWf/YiJRtAcgGn+1dw6KcN4Mw4uZsvkkPOfDeKSQx",
+  render_errors: [view: AskAGatorBackendWeb.ErrorView, accepts: ~w(json)],
+  pubsub: [name: AskAGatorBackend.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,

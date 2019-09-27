@@ -1,12 +1,12 @@
 %{
-configs: [
-  %{
-    name: "default",
-    files: %{
-      included: ["lib/", "test/"],
-      excluded: []
-    },
-    checks: []
-  }
-]
+  configs: [
+    %{
+      name: "default",
+      files: %{
+        included: ["lib/", "test/"],
+        excluded: []
+      },
+      checks: []
+    }
+  ]
 }
