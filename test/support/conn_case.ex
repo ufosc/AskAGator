@@ -1,4 +1,4 @@
-defmodule AskAGatorWeb.ConnCase do
+defmodule AskAGatorBackendWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,18 +19,18 @@ defmodule AskAGatorWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias AskAGatorWeb.Router.Helpers, as: Routes
+      alias AskAGatorBackendWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint AskAGatorWeb.Endpoint
+      @endpoint AskAGatorBackendWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AskAGator.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AskAGatorBackend.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(AskAGator.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(AskAGatorBackend.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

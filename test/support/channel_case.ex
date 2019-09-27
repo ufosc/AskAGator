@@ -1,4 +1,4 @@
-defmodule AskAGatorWeb.ChannelCase do
+defmodule AskAGatorBackendWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule AskAGatorWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint AskAGatorWeb.Endpoint
+      @endpoint AskAGatorBackendWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AskAGator.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AskAGatorBackend.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(AskAGator.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(AskAGatorBackend.Repo, {:shared, self()})
     end
 
     :ok
