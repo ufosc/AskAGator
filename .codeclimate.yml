@@ -1,6 +1,0 @@
-plugins:
-  credo:
-    enabled: true
-  tslint:
-    enabled: true
-    config: tslint.json

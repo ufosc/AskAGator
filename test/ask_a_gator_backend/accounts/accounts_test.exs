@@ -1,15 +1,15 @@
-defmodule AskAGator.AccountsTest do
+defmodule AskAGatorBackend.AccountsTest do
   @moduledoc """
     Tests the Accounts Context and the Users schema
   """
-  use AskAGator.DataCase
+  use AskAGatorBackend.DataCase
 
-  alias AskAGator.Accounts
-  alias AskAGator.Courses
-  alias AskAGator.Repo
+  alias AskAGatorBackend.Accounts
+  alias AskAGatorBackend.Courses
+  alias AskAGatorBackend.Repo
 
   describe "users" do
-    alias AskAGator.Accounts.User
+    alias AskAGatorBackend.Accounts.User
 
     @valid_attrs %{email: "some@email.com", first_name: "some first name", last_name: "some last name", password: "some password", password_confirmation: "some password"}
     @update_attrs %{email: "some@email.net", first_name: "some updated name", last_name: "some last name", password: "some password", password_confirmation: "some password"}

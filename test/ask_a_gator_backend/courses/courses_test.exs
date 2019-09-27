@@ -1,12 +1,12 @@
-defmodule AskAGator.CoursesTest do
+defmodule AskAGatorBackend.CoursesTest do
   @moduledoc """
     Tests the Courses Context and Courses schema
   """
-  use AskAGator.DataCase
-  alias AskAGator.Courses
+  use AskAGatorBackend.DataCase
+  alias AskAGatorBackend.Courses
 
   describe "courses" do
-    alias AskAGator.Courses.Course
+    alias AskAGatorBackend.Courses.Course
 
     @valid_attrs %{
       code: "COP1234",
