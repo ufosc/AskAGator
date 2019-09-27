@@ -47,7 +47,8 @@ defmodule AskAGatorBackend.MixProject do
       {:poison, "~> 4.0"},
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
-      {:puid, "~> 1.0"}
+      {:puid, "~> 1.0"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 
