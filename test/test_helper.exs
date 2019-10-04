@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(AskAGatorBackend.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(AskAGator.Repo, :manual)

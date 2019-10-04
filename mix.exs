@@ -1,9 +1,9 @@
-defmodule AskAGatorBackend.MixProject do
+defmodule AskAGator.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :ask_a_gator_backend,
+      app: :ask_a_gator,
       version: "0.1.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule AskAGatorBackend.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {AskAGatorBackend.Application, []},
+      mod: {AskAGator.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -33,22 +33,18 @@ defmodule AskAGatorBackend.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.10"},
+      {:phoenix, "~> 1.4.5"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
-      {:ecto_sql, "~> 3.1"},
+      {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
+      {:phoenix_html, "~> 2.11"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:comeonin, "~> 5.0"},
-      {:bcrypt_elixir, "~> 2.0"},
-      {:absinthe_plug, "~> 1.4.0"},
-      {:poison, "~> 4.0"},
-      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.10", only: :test},
-      {:puid, "~> 1.0"},
-      {:cors_plug, "~> 2.0"}
+      {:phoenix_live_view, "~> 0.3.0"},
+      {:floki, ">= 0.0.0", only: :test}
     ]
   end
 
