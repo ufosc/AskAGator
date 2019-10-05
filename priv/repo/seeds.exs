@@ -9,3 +9,6 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+alias AskAGator.Accounts.User
+
+AskAGator.Repo.insert! User.changeset(%User{}, %{first_name: "Test", last_name: "Tester", email: "test@test.com", password: "password", password_confirmation: "password"})
