@@ -11,6 +11,13 @@ import css from "../css/app.scss"
 //
 import "phoenix_html"
 
+import $ from "jquery";
+window.$ = $;
+
+import "popper.js"
+
+import "bootstrap"
+
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
