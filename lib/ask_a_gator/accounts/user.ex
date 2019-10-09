@@ -25,7 +25,6 @@ defmodule AskAGator.Accounts.User do
     |> validate_length(:password, min: 8)
     |> validate_confirmation(:password)
     |> unique_constraint(:email)
-    |> unique_constraint(:token)
     |> put_password_hash
   end
 
