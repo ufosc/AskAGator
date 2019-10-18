@@ -101,4 +101,13 @@ defmodule AskAGator.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
+
+  def authenticate_by_email_password(email, password) do
+    user = Repo.get_by(User, email: email)
+    if user && Bcrypt.verify_pass(password, user.password_hash) do
+      {:ok, user}
+    else
+      {:error, :unauthorized}
+    end
+  end
 end
