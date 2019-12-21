@@ -1,4 +1,4 @@
-defmodule AskAGatorBackend.DataCase do
+defmodule AskAGator.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,20 +16,20 @@ defmodule AskAGatorBackend.DataCase do
 
   using do
     quote do
-      alias AskAGatorBackend.Repo
+      alias AskAGator.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import AskAGatorBackend.DataCase
+      import AskAGator.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AskAGatorBackend.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AskAGator.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(AskAGatorBackend.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(AskAGator.Repo, {:shared, self()})
     end
 
     :ok
@@ -46,7 +46,7 @@ defmodule AskAGatorBackend.DataCase do
   def errors_on(changeset) do
     Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->
       Regex.replace(~r"%{(\w+)}", message, fn _, key ->
-        opts |> Keyword.get(String.to_existing_atom(key), key) |> to_string()
+        opts |> Map.get(String.to_existing_atom(key), key) |> to_string()
       end)
     end)
   end
