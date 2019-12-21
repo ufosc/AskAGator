@@ -20,7 +20,7 @@ defmodule AskAGator.MixProject do
   def application do
     [
       mod: {AskAGator.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:ex_machina, :logger, :runtime_tools]
     ]
   end
 
@@ -46,7 +46,8 @@ defmodule AskAGator.MixProject do
       {:phoenix_live_view, "~> 0.3.0"},
       {:floki, ">= 0.0.0", only: :test},
       {:bcrypt_elixir, "~> 2.0"},
-      {:guardian, "~> 1.2"}
+      {:guardian, "~> 1.2"},
+      {:ex_machina, "~> 2.3"}
     ]
   end
 

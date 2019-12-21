@@ -2,7 +2,6 @@ defmodule AskAGatorWeb.SessionController do
   use AskAGatorWeb, :controller
 
   alias AskAGator.Accounts
-  alias AskAGator.Accounts.User
 
   def login(conn, _params) do
     render(conn, "login.html")
@@ -21,6 +20,12 @@ defmodule AskAGatorWeb.SessionController do
         |> put_flash(:error, "Bad email/password combination")
         |> redirect(to: Routes.session_path(conn, :login))
     end
+  end
+
+  def create(conn, _) do
+    conn
+    |> put_flash(:error, "Bad Parameters")
+    |> redirect(to: Routes.session_path(conn, :login))
   end
 
   def logout(conn, _) do
