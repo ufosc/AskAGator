@@ -1,0 +1,37 @@
+version: '3'
+services:
+    db:
+        image: postgres
+        environment: 
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            # Set a path where Postgres should store the data
+            PGDATA: /var/lib/postgresql/data/pgdata
+        restart: always
+        volumes:
+        - pgdata:/var/lib/postgresql/data
+    web:
+        build:
+            context: .
+        entrypoint: [ "/app/docker-run.sh" ]
+        environment: 
+            PGUSER: postgres
+            PGPASSWORD: postgres
+            PGDATABASE: ask_a_gator_dev
+            PGPORT: 5432
+            PGHOST: db
+            MIX_ENV: dev
+        ports: 
+            - "4000:4000"
+        depends_on: 
+            - db
+        volumes: 
+            - .:/app
+            - askagator_deps:/app/deps
+            - askagator_build:/app/_build
+            - askagator_nodemod:/app/assets/node_modules
+volumes: 
+    pgdata: 
+    askagator_deps:
+    askagator_build:
+    askagator_nodemod:
