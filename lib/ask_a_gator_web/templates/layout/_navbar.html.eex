@@ -1,3 +1,20 @@
-<nav class="navbar navbar-dark bg-primary">
-    <a class="navbar-brand" href="/">Ask A Gator</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand mr-auto" href="/">Ask A Gator</a>
+    <ul class="navbar-nav">
+    <%= if @user_signed_in? do %>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hello, <%= @current_user.first_name %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link "Logout", to: Routes.session_path(@conn, :logout), class: "dropdown-item" %>
+            </div>
+            
+        </li>
+    <% else %>
+        <li class="nav-item">
+            <%= link "Sign In", to: Routes.session_path(@conn, :login), class: "nav-link" %>
+        </li>
+    <% end %>
+    </ul>
 </nav>

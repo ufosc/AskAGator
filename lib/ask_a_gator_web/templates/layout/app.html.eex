@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
   <body>
-    <%= render "_navbar.html", conn: @conn %>
+    <%= render "_navbar.html", assigns %>
     <main role="main" class="container">
       <%= render "_flash_alerts.html", conn: @conn %>
       <%= render @view_module, @view_template, assigns %>
