@@ -1,0 +1,36 @@
+<%= form_for @conn, Routes.user_path(@conn, :create), [method: :post, as: :user], fn f -> %>
+
+<div class="form-group">
+    <label for="form-first">First Name:</label>
+    <%= text_input f, :first_name, placeholder: "First Name", id: "form-first", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label for="form-middle">Middle Name:</label>
+    <%= text_input f, :middle_name, placeholder: "Middle Name", id: "form-middle", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label for="form-last">Last Name:</label>
+    <%= text_input f, :last_name, placeholder: "Last Name", id: "form-last", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label for="form-email">Email Address:</label>
+    <%= text_input f, :email, placeholder: "Email", id: "form-email", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label for="form-password">Password:</label>
+    <%= password_input f, :password, placeholder: "Password", id: "form-password", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label for="form-password-conf">Re-enter Password:</label>
+    <%= password_input f, :password_confirmation, placeholder: "Re-enter Password", id: "form-password-conf", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Sign Up", class: "btn btn-info" %>
+  </div>
+<% end %>
