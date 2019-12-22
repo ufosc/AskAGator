@@ -1,13 +1,15 @@
 <%= form_for @conn, Routes.session_path(@conn, :create), [method: :post, as: :user], fn f -> %>
   <div class="form-group">
-    <%= text_input f, :email, placeholder: "Email" %>
+    <label for="form-email">Email Address:</label>
+    <%= text_input f, :email, placeholder: "Email", id: "form-email", class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= password_input f, :password, placeholder: "Password" %>
+    <label for="form-password">Password:</label>
+    <%= password_input f, :password, placeholder: "Password", id: "form-password", class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= submit "Login" %>
+    <%= submit "Login", class: "btn btn-info" %>
   </div>
 <% end %>
