@@ -27,12 +27,12 @@
 
         <div class="form-group">
             <label for="form-password">New Password:</label>
-            <%= password_input f, :new_password, placeholder: "Password", id: "form-password", class: "form-control" %>
+            <%= password_input f, :password, placeholder: "Password", id: "form-password", class: "form-control" %>
         </div>
 
         <div class="form-group">
             <label for="form-password-conf">Re-enter Password:</label>
-            <%= password_input f, :new_password_confirmation, placeholder: "Re-enter Password", id: "form-password-conf", class: "form-control" %>
+            <%= password_input f, :password_confirmation, placeholder: "Re-enter Password", id: "form-password-conf", class: "form-control" %>
         </div>
 
         <div class="form-group">

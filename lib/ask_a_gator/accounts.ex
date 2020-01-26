@@ -110,4 +110,33 @@ defmodule AskAGator.Accounts do
       {:error, :unauthorized}
     end
   end
+
+  defp verify_old_pass_if_exists(attrs) do
+    case Map.fetch(attrs, :old_password) do
+      {:ok, old_pass} ->
+        if old_pass && String.length(old_pass) > 0 do
+          case authenticate_by_email_password(attrs[:email], old_pass) do
+            {:ok, _user} ->
+              {:ok}
+            {:error, :unauthorized} ->
+              {:error}
+          end
+        else
+          {:ok}
+        end
+      :error ->
+        {:ok}
+    end
+  end
+
+  def update_profile(user, attrs) do
+    case verify_old_pass_if_exists(attrs) do
+      {:ok} ->
+        user
+        |> User.profile_changeset(attrs)
+        |> Repo.update
+      {:error} ->
+        {:error, :password_mismatch}
+    end
+  end
 end

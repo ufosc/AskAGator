@@ -26,6 +26,7 @@ defmodule AskAGatorWeb.Router do
     get "/sign_up", UserController, :sign_up
     post "/sign_up", UserController, :create
     get "/profile", UserController, :profile
+    post "/profile", UserController, :update_profile
   end
 
   # Other scopes may use custom stacks.
