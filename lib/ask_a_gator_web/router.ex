@@ -22,8 +22,10 @@ defmodule AskAGatorWeb.Router do
     get "/login", SessionController, :login
     post "/login", SessionController, :create
     get "/logout", SessionController, :logout
+
     get "/sign_up", UserController, :sign_up
     post "/sign_up", UserController, :create
+    get "/profile", UserController, :profile
   end
 
   # Other scopes may use custom stacks.

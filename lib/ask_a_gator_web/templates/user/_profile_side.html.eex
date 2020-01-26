@@ -1,0 +1,14 @@
+<div class="mt-2 card shadow-sm">
+    <div class="card-header">
+        My Profile
+    </div>
+    <div class="card-body grid">
+        <h5 class="card-title"><%= "#{@current_user.first_name} #{@current_user.middle_name} #{@current_user.last_name}" %></h5>
+        <div class="row">
+            <strong class="text-center"></strong>
+        </div>
+        <div class="row">
+            <strong class="card-text"><%= "#{@current_user.email}" %></strong>
+        </div>
+    </div>
+</div>

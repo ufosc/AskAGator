@@ -7,6 +7,7 @@
             Hello, <%= @current_user.first_name %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link "Profile", to: Routes.user_path(@conn, :profile), class: "dropdown-item" %>
                 <%= link "Logout", to: Routes.session_path(@conn, :logout), class: "dropdown-item" %>
             </div>
             

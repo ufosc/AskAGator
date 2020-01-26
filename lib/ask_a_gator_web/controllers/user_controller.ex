@@ -1,7 +1,10 @@
 defmodule AskAGatorWeb.UserController do
   use AskAGatorWeb, :controller
 
+  alias AskAGatorWeb.Plugs.AuthenticateUser
   alias AskAGator.Accounts
+
+  plug AuthenticateUser when action in [:profile]
 
   def sign_up(conn, _params) do
     render(conn, "sign_up.html")
@@ -20,5 +23,9 @@ defmodule AskAGatorWeb.UserController do
         |> put_flash(:error, "Error creating account")
         |> redirect(to: Routes.user_path(conn, :sign_up))
     end
+  end
+
+  def profile(conn, _params) do
+    render(conn, "profile.html")
   end
 end
