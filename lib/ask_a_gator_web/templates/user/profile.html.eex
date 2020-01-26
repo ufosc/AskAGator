@@ -1,16 +1,42 @@
-
 <%= render "_profile_side.html", assigns %>
-<div class="mt-2 card shadow-sm">
-    <div class="card-header">
-        My Profile
-    </div>
-    <div class="card-body grid">
-        <h5 class="card-title"><%= "#{@current_user.first_name} #{@current_user.middle_name} #{@current_user.last_name}" %></h5>
-        <div class="row">
-            <strong class="text-center"></strong>
+<div class="container-fluid">
+    <h1 class="display-4">Profile</h1>
+    <%= form_for @conn, Routes.user_path(@conn, :update_profile), [method: :post, as: :user], fn f-> %>
+        <div class="form-group">
+            <label for="form-first">First Name:</label>
+            <%= text_input f, :first_name, placeholder: "First Name", id: "form-first", class: "form-control", value: @current_user.first_name %>
         </div>
-        <div class="row">
-            <strong class="card-text"><%= "#{@current_user.email}" %></strong>
+
+        <div class="form-group">
+            <label for="form-middle">Middle Name:</label>
+            <%= text_input f, :middle_name, placeholder: "Middle Name", id: "form-middle", class: "form-control", value: @current_user.middle_name %>
         </div>
-    </div>
+
+        <div class="form-group">
+            <label for="form-last">Last Name:</label>
+            <%= text_input f, :last_name, placeholder: "Last Name", id: "form-last", class: "form-control", value: @current_user.last_name %>
+        </div>
+
+        <hr/>
+        <h4>Change Password</h4>
+
+        <div class="form-group">
+            <label for="form-password">Old Password:</label>
+            <%= password_input f, :old_password, placeholder: "Password", id: "form-password", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+            <label for="form-password">New Password:</label>
+            <%= password_input f, :new_password, placeholder: "Password", id: "form-password", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+            <label for="form-password-conf">Re-enter Password:</label>
+            <%= password_input f, :new_password_confirmation, placeholder: "Re-enter Password", id: "form-password-conf", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+            <%= submit "Update Profile", class: "btn btn-info" %>
+        </div>
+    <% end %>
 </div>
