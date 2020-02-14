@@ -18,11 +18,6 @@ config :ask_a_gator, AskAGatorWeb.Endpoint,
   pubsub: [name: AskAGator.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [signing_salt: "s3rSG2r10yr6Y4DFCAZAjt1JzJTjp83j"]
 
-# Configures the Guardian JWT
-config :ask_a_gator, AskAGator.Guardian,
-  issuer: "ask_a_gator",
-  secret_key: "anXVSCh81v7tKCs/ckuXVnkOKZXAzuIOZudPJaxisCZx5bPBVrvjT6SuzTeRLL/M"
-
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
