@@ -33,6 +33,8 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
     - Framework: [Phoenix](https://hexdocs.pm/phoenix/Phoenix.html)
     - Database: [Postgres](https://www.postgresql.org/docs/)
  
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ 
 ## Thank you to our contributors!
 <a href="https://github.com/ufosc/AskAGator/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ufosc/AskAGator" />
